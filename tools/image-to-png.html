@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PNG Converter - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Convert your images to PNG format with transparency support using our free online Image to PNG Converter tool.">
+    <meta name="keywords" content="image to png, png converter, image converter, online png converter, free png converter">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">Image to PNG Converter</h1>
+            <p class="lead">Convert your images to PNG format with transparency support</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Upload Your Image</h2>
+                            
+                            <div class="upload-container mb-4 text-center p-5 border border-dashed rounded">
+                                <i class="fas fa-cloud-upload-alt fa-3x mb-3 text-primary"></i>
+                                <h3 class="mb-3">Drag & Drop or Click to Upload</h3>
+                                <p class="mb-3">Supports JPG, JPEG, WebP, GIF, BMP, and more</p>
+                                <input type="file" id="image-upload" class="d-none" accept="image/*">
+                                <button id="upload-btn" class="btn btn-primary">Select Image</button>
+                            </div>
+                            
+                            <div id="image-preview-container" class="mb-4 text-center d-none">
+                                <h3 class="mb-3">Preview</h3>
+                                <div class="position-relative d-inline-block">
+                                    <img id="image-preview" class="img-fluid rounded mb-3 max-height-300" src="" alt="Image Preview">
+                                    <button id="remove-image-btn" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="image-info mb-3">
+                                    <p id="image-name" class="mb-1"></p>
+                                    <p id="image-size" class="mb-1"></p>
+                                    <p id="image-dimensions" class="mb-0"></p>
+                                </div>
+                            </div>
+                            
+                            <div id="conversion-options" class="mb-4 d-none">
+                                <h3 class="mb-3">Conversion Options</h3>
+                                <div class="mb-3">
+                                    <label for="quality-range" class="form-label">Quality: <span id="quality-value">90</span>%</label>
+                                    <input type="range" class="form-range" id="quality-range" min="10" max="100" value="90">
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="preserve-transparency" checked>
+                                    <label class="form-check-label" for="preserve-transparency">
+                                        Preserve Transparency
+                                    </label>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="resize-image">
+                                    <label class="form-check-label" for="resize-image">
+                                        Resize Image
+                                    </label>
+                                </div>
+                                <div id="resize-options" class="mb-3 d-none">
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <label for="width-input" class="form-label">Width (px)</label>
+                                            <input type="number" class="form-control" id="width-input" placeholder="Width">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="height-input" class="form-label">Height (px)</label>
+                                            <input type="number" class="form-control" id="height-input" placeholder="Height">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="maintain-aspect-ratio" checked>
+                                                <label class="form-check-label" for="maintain-aspect-ratio">
+                                                    Maintain Aspect Ratio
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button id="convert-btn" class="btn btn-primary btn-lg" disabled>Convert to PNG</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card neon-card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Download</h2>
+                            <div id="download-container" class="text-center p-4">
+                                <p id="no-download-message">Your converted PNG will appear here</p>
+                                <div id="download-content" class="d-none">
+                                    <img id="converted-image-preview" class="img-fluid rounded mb-3 max-height-200" src="" alt="Converted Image">
+                                    <p id="converted-image-size" class="mb-3"></p>
+                                    <a id="download-btn" href="#" class="btn btn-success btn-lg w-100" download="converted-image.png">
+                                        <i class="fas fa-download me-2"></i> Download PNG
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Ad -->
+                    <div class="ad-container text-center p-4 neon-border">
+                        <p>Advertisement Space</p>
+                        <!-- Ad code will go here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the Image to PNG Converter</h2>
+                    <ol>
+                        <li class="mb-2">Click the "Select Image" button or drag and drop your image into the upload area.</li>
+                        <li class="mb-2">Adjust the conversion options as needed (quality, transparency, resize).</li>
+                        <li class="mb-2">Click the "Convert to PNG" button to process your image.</li>
+                        <li class="mb-2">Once conversion is complete, click the "Download PNG" button to save your converted image.</li>
+                    </ol>
+                    <h3 class="mt-4">About PNG Format</h3>
+                    <p>PNG (Portable Network Graphics) is a raster graphics file format that supports lossless data compression. PNG was created as an improved, non-patented replacement for GIF.</p>
+                    <p>Key features of PNG format:</p>
+                    <ul>
+                        <li>Lossless compression - maintains image quality</li>
+                        <li>Transparency support - allows for transparent backgrounds</li>
+                        <li>Better color depth than GIF (up to 16 million colors)</li>
+                        <li>Widely supported by browsers and image editing software</li>
+                        <li>Ideal for logos, icons, and images with text or sharp edges</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Image to JPG Converter</h5>
+                            <p class="card-text flex-grow-1">Convert your images to JPG format with quality control.</p>
+                            <a href="image-to-jpg.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Image Resizer</h5>
+                            <p class="card-text flex-grow-1">Resize your images to any dimension while maintaining quality.</p>
+                            <a href="image-resizer.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Image Compressor</h5>
+                            <p class="card-text flex-grow-1">Compress your images to reduce file size without losing quality.</p>
+                            <a href="image-compressor.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Convert WebP to PNG</h5>
+                            <p class="card-text flex-grow-1">Convert WebP images to PNG format for better compatibility.</p>
+                            <a href="webp-to-png.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const uploadBtn = document.getElementById('upload-btn');
+            const imageUpload = document.getElementById('image-upload');
+            const imagePreviewContainer = document.getElementById('image-preview-container');
+            const imagePreview = document.getElementById('image-preview');
+            const imageName = document.getElementById('image-name');
+            const imageSize = document.getElementById('image-size');
+            const imageDimensions = document.getElementById('image-dimensions');
+            const removeImageBtn = document.getElementById('remove-image-btn');
+            const conversionOptions = document.getElementById('conversion-options');
+            const qualityRange = document.getElementById('quality-range');
+            const qualityValue = document.getElementById('quality-value');
+            const resizeImage = document.getElementById('resize-image');
+            const resizeOptions = document.getElementById('resize-options');
+            const widthInput = document.getElementById('width-input');
+            const heightInput = document.getElementById('height-input');
+            const maintainAspectRatio = document.getElementById('maintain-aspect-ratio');
+            const convertBtn = document.getElementById('convert-btn');
+            const downloadContent = document.getElementById('download-content');
+            const noDownloadMessage = document.getElementById('no-download-message');
+            const convertedImagePreview = document.getElementById('converted-image-preview');
+            const convertedImageSize = document.getElementById('converted-image-size');
+            const downloadBtn = document.getElementById('download-btn');
+            
+            let originalImage = null;
+            let imageAspectRatio = 1;
+            
+            // Event listeners
+            uploadBtn.addEventListener('click', function() {
+                imageUpload.click();
+            });
+            
+            imageUpload.addEventListener('change', handleImageUpload);
+            
+            // Drag and drop functionality
+            const uploadContainer = document.querySelector('.upload-container');
+            
+            uploadContainer.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadContainer.classList.add('border-primary');
+            });
+            
+            uploadContainer.addEventListener('dragleave', function() {
+                uploadContainer.classList.remove('border-primary');
+            });
+            
+            uploadContainer.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadContainer.classList.remove('border-primary');
+                
+                if (e.dataTransfer.files.length) {
+                    imageUpload.files = e.dataTransfer.files;
+                    handleImageUpload();
+                }
+            });
+            
+            // Remove image
+            removeImageBtn.addEventListener('click', function() {
+                resetTool();
+            });
+            
+            // Quality slider
+            qualityRange.addEventListener('input', function() {
+                qualityValue.textContent = this.value;
+            });
+            
+            // Resize checkbox
+            resizeImage.addEventListener('change', function() {
+                resizeOptions.classList.toggle('d-none', !this.checked);
+            });
+            
+            // Maintain aspect ratio
+            widthInput.addEventListener('input', function() {
+                if (maintainAspectRatio.checked && this.value) {
+                    heightInput.value = Math.round(this.value / imageAspectRatio);
+                }
+            });
+            
+            heightInput.addEventListener('input', function() {
+                if (maintainAspectRatio.checked && this.value) {
+                    widthInput.value = Math.round(this.value * imageAspectRatio);
+                }
+            });
+            
+            // Convert button
+            convertBtn.addEventListener('click', convertImage);
+            
+            // Functions
+            function handleImageUpload() {
+                const file = imageUpload.files[0];
+                
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        // Display image preview
+                        imagePreview.src = e.target.result;
+                        imagePreviewContainer.classList.remove('d-none');
+                        
+                        // Store original image for processing
+                        originalImage = new Image();
+                        originalImage.onload = function() {
+                            // Display image info
+                            imageName.textContent = `File name: ${file.name}`;
+                            imageSize.textContent = `File size: ${formatFileSize(file.size)}`;
+                            imageDimensions.textContent = `Dimensions: ${this.width} × ${this.height} px`;
+                            
+                            // Set aspect ratio for resizing
+                            imageAspectRatio = this.width / this.height;
+                            
+                            // Set default resize values
+                            widthInput.value = this.width;
+                            heightInput.value = this.height;
+                            
+                            // Show conversion options
+                            conversionOptions.classList.remove('d-none');
+                            
+                            // Enable convert button
+                            convertBtn.disabled = false;
+                        };
+                        originalImage.src = e.target.result;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            function convertImage() {
+                // Show loading state
+                convertBtn.disabled = true;
+                convertBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Converting...';
+                
+                // Simulate processing delay (in a real app, this would be actual conversion)
+                setTimeout(function() {
+                    // Create a canvas to process the image
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    // Set canvas dimensions
+                    let width = originalImage.width;
+                    let height = originalImage.height;
+                    
+                    // Apply resize if enabled
+                    if (resizeImage.checked && widthInput.value && heightInput.value) {
+                        width = parseInt(widthInput.value);
+                        height = parseInt(heightInput.value);
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // Draw image on canvas
+                    ctx.drawImage(originalImage, 0, 0, width, height);
+                    
+                    // Convert canvas to PNG data URL
+                    const quality = parseInt(qualityRange.value) / 100;
+                    const pngDataUrl = canvas.toDataURL('image/png', quality);
+                    
+                    // Display converted image
+                    convertedImagePreview.src = pngDataUrl;
+                    
+                    // Estimate file size (this is approximate)
+                    const estimatedSize = Math.round((pngDataUrl.length * 3) / 4);
+                    convertedImageSize.textContent = `Estimated file size: ${formatFileSize(estimatedSize)}`;
+                    
+                    // Set download link
+                    downloadBtn.href = pngDataUrl;
+                    
+                    // Show download section
+                    noDownloadMessage.classList.add('d-none');
+                    downloadContent.classList.remove('d-none');
+                    
+                    // Reset convert button
+                    convertBtn.disabled = false;
+                    convertBtn.innerHTML = 'Convert to PNG';
+                }, 1500);
+            }
+            
+            function resetTool() {
+                // Reset file input
+                imageUpload.value = '';
+                
+                // Hide preview and options
+                imagePreviewContainer.classList.add('d-none');
+                conversionOptions.classList.add('d-none');
+                
+                // Reset download section
+                noDownloadMessage.classList.remove('d-none');
+                downloadContent.classList.add('d-none');
+                
+                // Disable convert button
+                convertBtn.disabled = true;
+                
+                // Reset original image
+                originalImage = null;
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes < 1024) {
+                    return bytes + ' bytes';
+                } else if (bytes < 1048576) {
+                    return (bytes / 1024).toFixed(2) + ' KB';
+                } else {
+                    return (bytes / 1048576).toFixed(2) + ' MB';
+                }
+            }
+        });
+    </script>
+    
+    <style>
+        .max-height-300 {
+            max-height: 300px;
+        }
+        
+        .max-height-200 {
+            max-height: 200px;
+        }
+        
+        .border-dashed {
+            border-style: dashed !important;
+        }
+        
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 8px #0ff) 
+                    drop-shadow(0 0 15px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 8px #0ff) 
+                        drop-shadow(0 0 15px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 15px #0ff) 
+                        drop-shadow(0 0 25px #0ff);
+            }
+        }
+    </style>
+</body>
+</html> 

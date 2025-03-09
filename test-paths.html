@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path Test - NeonTools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .test-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>NeonTools Path Test</h1>
+    
+    <div class="test-container">
+        <h2>Testing File Existence</h2>
+        <div id="file-tests"></div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Current Location</h2>
+        <div id="location-info"></div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="index.html">Home Page</a></li>
+            <li><a href="tools/word-counter.html">Word Counter Tool</a></li>
+            <li><a href="tools/image-to-png.html">Image to PNG Tool</a></li>
+        </ul>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display location info
+            const locationInfo = document.getElementById('location-info');
+            locationInfo.innerHTML = `
+                <p><strong>Current Path:</strong> ${window.location.pathname}</p>
+                <p><strong>Base URL:</strong> ${window.location.origin}</p>
+                <p><strong>Full URL:</strong> ${window.location.href}</p>
+            `;
+            
+            // Test files
+            const filesToTest = [
+                'index.html',
+                'header.html',
+                'footer.html',
+                'css/style.css',
+                'js/main.js',
+                'js/tools-data.js',
+                'img.jpg',
+                'tools/word-counter.html',
+                'tools/image-to-png.html'
+            ];
+            
+            const fileTests = document.getElementById('file-tests');
+            
+            // Test each file
+            filesToTest.forEach(file => {
+                fetch(file)
+                    .then(response => {
+                        if (response.ok) {
+                            fileTests.innerHTML += `<p class="success">✓ ${file} exists</p>`;
+                        } else {
+                            fileTests.innerHTML += `<p class="error">✗ ${file} not found (${response.status})</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        fileTests.innerHTML += `<p class="error">✗ Error checking ${file}: ${error.message}</p>`;
+                    });
+            });
+        });
+    </script>
+</body>
+</html> 

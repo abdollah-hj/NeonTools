@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Count words, characters, sentences, and paragraphs in your text with our free online Word Counter tool.">
+    <meta name="keywords" content="word counter, character counter, text counter, online word count, free word counter">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">Word Counter</h1>
+            <p class="lead">Count words, characters, sentences, and paragraphs in your text</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter Your Text</h2>
+                            <textarea id="text-input" class="form-control mb-4" rows="10" placeholder="Type or paste your text here..."></textarea>
+                            <div class="d-flex justify-content-between">
+                                <button id="clear-btn" class="btn btn-danger">Clear</button>
+                                <button id="copy-btn" class="btn btn-primary">Copy Text</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card neon-card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Statistics</h2>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Words
+                                    <span id="word-count" class="badge bg-primary rounded-pill">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Characters (with spaces)
+                                    <span id="char-count-with-spaces" class="badge bg-primary rounded-pill">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Characters (without spaces)
+                                    <span id="char-count-without-spaces" class="badge bg-primary rounded-pill">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Sentences
+                                    <span id="sentence-count" class="badge bg-primary rounded-pill">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Paragraphs
+                                    <span id="paragraph-count" class="badge bg-primary rounded-pill">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent text-white">
+                                    Reading Time
+                                    <span id="reading-time" class="badge bg-primary rounded-pill">0 min</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Ad -->
+                    <div class="ad-container text-center p-4 neon-border">
+                        <p>Advertisement Space</p>
+                        <!-- Ad code will go here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the Word Counter Tool</h2>
+                    <ol>
+                        <li class="mb-2">Type or paste your text in the text area above.</li>
+                        <li class="mb-2">The tool will automatically count words, characters, sentences, and paragraphs.</li>
+                        <li class="mb-2">Use the "Copy Text" button to copy your text to the clipboard.</li>
+                        <li class="mb-2">Use the "Clear" button to clear the text area and start over.</li>
+                    </ol>
+                    <h3 class="mt-4">About Word Counter</h3>
+                    <p>Our Word Counter tool provides accurate counts of words, characters (with and without spaces), sentences, and paragraphs in your text. It also estimates the reading time based on an average reading speed of 200 words per minute.</p>
+                    <p>This tool is useful for:</p>
+                    <ul>
+                        <li>Students writing essays with word count requirements</li>
+                        <li>Content writers creating articles of specific lengths</li>
+                        <li>Social media managers ensuring posts fit character limits</li>
+                        <li>Anyone who needs to analyze text statistics</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Character Counter</h5>
+                            <p class="card-text flex-grow-1">Count the number of characters in your text, with or without spaces.</p>
+                            <a href="character-counter.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Case Converter</h5>
+                            <p class="card-text flex-grow-1">Convert text to uppercase, lowercase, title case, or sentence case.</p>
+                            <a href="case-converter.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Grammar Checker</h5>
+                            <p class="card-text flex-grow-1">Check your text for grammar, spelling, and punctuation errors.</p>
+                            <a href="grammar-checker.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Text-to-Speech</h5>
+                            <p class="card-text flex-grow-1">Convert your text to speech with natural-sounding voices.</p>
+                            <a href="text-to-speech.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const textInput = document.getElementById('text-input');
+            const wordCount = document.getElementById('word-count');
+            const charCountWithSpaces = document.getElementById('char-count-with-spaces');
+            const charCountWithoutSpaces = document.getElementById('char-count-without-spaces');
+            const sentenceCount = document.getElementById('sentence-count');
+            const paragraphCount = document.getElementById('paragraph-count');
+            const readingTime = document.getElementById('reading-time');
+            const clearBtn = document.getElementById('clear-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            
+            // Function to count text statistics
+            function countTextStats() {
+                const text = textInput.value;
+                
+                // Count words
+                const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+                wordCount.textContent = words;
+                
+                // Count characters with spaces
+                charCountWithSpaces.textContent = text.length;
+                
+                // Count characters without spaces
+                charCountWithoutSpaces.textContent = text.replace(/\s+/g, '').length;
+                
+                // Count sentences
+                const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(Boolean).length;
+                sentenceCount.textContent = sentences;
+                
+                // Count paragraphs
+                const paragraphs = text.trim() === '' ? 0 : text.split(/\n+/).filter(Boolean).length;
+                paragraphCount.textContent = paragraphs;
+                
+                // Calculate reading time
+                const minutes = Math.ceil(words / 200); // Average reading speed: 200 words per minute
+                readingTime.textContent = `${minutes} min`;
+            }
+            
+            // Event listeners
+            textInput.addEventListener('input', countTextStats);
+            
+            clearBtn.addEventListener('click', function() {
+                textInput.value = '';
+                countTextStats();
+            });
+            
+            copyBtn.addEventListener('click', function() {
+                textInput.select();
+                document.execCommand('copy');
+                
+                // Show feedback
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            margin-right: 10px;
+            filter: drop-shadow(0 0 8px #0ff) 
+                    drop-shadow(0 0 15px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 8px #0ff) 
+                        drop-shadow(0 0 15px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 15px #0ff) 
+                        drop-shadow(0 0 25px #0ff);
+            }
+        }
+    </style>
+</body>
+</html> 
