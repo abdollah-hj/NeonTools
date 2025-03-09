@@ -115,6 +115,7 @@ body::before {
         0 0 15px rgba(0, 255, 255, 0.1);
     transition: all 0.3s ease;
     backdrop-filter: blur(5px);
+    color: #fff;
 }
 
 .neon-card:hover {
@@ -404,4 +405,51 @@ footer {
     .category-card .card-title {
         font-size: 0.9rem;
     }
+}
+
+/* Ensure all text in neon-card is white */
+.neon-card p, 
+.neon-card li, 
+.neon-card ol, 
+.neon-card ul,
+.neon-card label,
+.neon-card .form-label,
+.neon-card .form-check-label {
+    color: #fff;
+}
+
+/* JSON Formatter Syntax Highlighting */
+.json-key {
+    color: #00ffff;
+}
+
+.json-string {
+    color: #ff9cee;
+}
+
+.json-boolean {
+    color: #00ff00;
+}
+
+.json-number {
+    color: #ffff00;
+}
+
+/* Password Generator Styles */
+.password-history-item {
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+/* QR Code Generator Styles */
+#qr-code-output {
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.qr-input-field {
+    display: none;
 } 

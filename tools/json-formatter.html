@@ -76,7 +76,7 @@
             <div class="card neon-card">
                 <div class="card-body">
                     <h2 class="card-title mb-4">How to Use the JSON Formatter Tool</h2>
-                    <ol>
+                    <ol class="text-white">
                         <li class="mb-2">Paste your JSON data into the input area on the left.</li>
                         <li class="mb-2">Click the "Format JSON" button to beautify and validate your JSON.</li>
                         <li class="mb-2">If your JSON is valid, it will be displayed with syntax highlighting on the right.</li>
@@ -85,9 +85,9 @@
                         <li class="mb-2">Use the "Download" button to save the formatted JSON as a file.</li>
                     </ol>
                     <h3 class="mt-4">About JSON Format</h3>
-                    <p>JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. It is based on a subset of the JavaScript Programming Language.</p>
-                    <p>Key features of JSON:</p>
-                    <ul>
+                    <p class="text-white">JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate. It is based on a subset of the JavaScript Programming Language.</p>
+                    <p class="text-white">Key features of JSON:</p>
+                    <ul class="text-white">
                         <li>Data is represented in name/value pairs</li>
                         <li>Curly braces hold objects and each name is followed by a colon and the name/value pairs are separated by commas</li>
                         <li>Square brackets hold arrays and values are separated by commas</li>
@@ -150,6 +150,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/json.min.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/json-formatter.js"></script>
     <script>
         // Add error handling for component loading
         window.addEventListener('error', function(e) {
@@ -164,7 +165,6 @@
                             <nav class="navbar navbar-dark bg-dark">
                                 <div class="container">
                                     <a class="navbar-brand" href="../index.html">NeonTools</a>
-                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
                                 </div>
                             </nav>
                         </header>
