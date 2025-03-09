@@ -352,20 +352,28 @@ footer {
 /* Logo Glow Effect */
 .logo-glow {
     height: 40px;
+    width: 40px;
     margin-right: 10px;
-    filter: drop-shadow(0 0 8px var(--neon-primary)) 
-            drop-shadow(0 0 15px var(--neon-primary));
+    border-radius: 50%;
+    object-fit: cover;
+    filter: drop-shadow(0 0 10px var(--neon-primary)) 
+            drop-shadow(0 0 20px var(--neon-primary));
     animation: logo-pulse 2s infinite alternate;
+    transition: transform 0.3s ease;
+}
+
+.logo-glow:hover {
+    transform: scale(1.1);
 }
 
 @keyframes logo-pulse {
     from {
-        filter: drop-shadow(0 0 8px var(--neon-primary)) 
-                drop-shadow(0 0 15px var(--neon-primary));
+        filter: drop-shadow(0 0 10px var(--neon-primary)) 
+                drop-shadow(0 0 20px var(--neon-primary));
     }
     to {
-        filter: drop-shadow(0 0 15px var(--neon-primary)) 
-                drop-shadow(0 0 25px var(--neon-primary));
+        filter: drop-shadow(0 0 20px var(--neon-primary)) 
+                drop-shadow(0 0 30px var(--neon-primary));
     }
 }
 
