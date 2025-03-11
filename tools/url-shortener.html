@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Shorten long URLs with our free online URL Shortener tool. Create compact, shareable links instantly.">
+    <meta name="keywords" content="url shortener, link shortener, shorten url, short link generator, tiny url">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">URL Shortener</h1>
+            <p class="lead">Create short, shareable links from long URLs</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter Your Long URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="url" id="long-url" class="form-control" placeholder="https://example.com/very/long/url/that/needs/shortening">
+                                <button id="shorten-btn" class="btn btn-primary">Shorten URL</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Enter a valid URL including the http:// or https:// prefix
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Generating short URL...</p>
+                            </div>
+                            
+                            <!-- Advanced Options (Collapsible) -->
+                            <div class="mt-4">
+                                <a class="text-decoration-none" data-bs-toggle="collapse" href="#advancedOptions" role="button" aria-expanded="false" aria-controls="advancedOptions">
+                                    <i class="fas fa-cog me-2"></i> Advanced Options <i class="fas fa-chevron-down ms-1 small"></i>
+                                </a>
+                                <div class="collapse mt-3" id="advancedOptions">
+                                    <div class="card card-body bg-dark">
+                                        <div class="mb-3">
+                                            <label for="custom-alias" class="form-label text-white">Custom Alias (Optional)</label>
+                                            <input type="text" class="form-control" id="custom-alias" placeholder="my-custom-link">
+                                            <div class="form-text text-white-50">Create a custom short URL (availability depends on the service)</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="expiration" class="form-label text-white">Link Expiration (Optional)</label>
+                                            <select class="form-select" id="expiration">
+                                                <option value="never" selected>Never</option>
+                                                <option value="1d">1 Day</option>
+                                                <option value="7d">7 Days</option>
+                                                <option value="30d">30 Days</option>
+                                                <option value="90d">90 Days</option>
+                                                <option value="custom">Custom Date</option>
+                                            </select>
+                                        </div>
+                                        <div id="custom-date-container" class="mb-3 d-none">
+                                            <label for="custom-date" class="form-label text-white">Custom Expiration Date</label>
+                                            <input type="date" class="form-control" id="custom-date">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label text-white">Shortening Service</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="shortening-service" id="service-tinyurl" value="tinyurl" checked>
+                                                <label class="form-check-label text-white" for="service-tinyurl">
+                                                    TinyURL
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="shortening-service" id="service-bitly" value="bitly">
+                                                <label class="form-check-label text-white" for="service-bitly">
+                                                    Bitly
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="shortening-service" id="service-rebrandly" value="rebrandly">
+                                                <label class="form-check-label text-white" for="service-rebrandly">
+                                                    Rebrandly
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card neon-card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Your Short URL</h2>
+                            <div id="result-container" class="d-none">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="short-url" class="form-control" readonly>
+                                    <button id="copy-btn" class="btn btn-primary">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <a id="visit-btn" href="#" target="_blank" class="btn btn-success">
+                                        <i class="fas fa-external-link-alt me-2"></i> Visit URL
+                                    </a>
+                                    <button id="qr-btn" class="btn btn-secondary">
+                                        <i class="fas fa-qrcode me-2"></i> Generate QR Code
+                                    </button>
+                                </div>
+                                <div id="qr-container" class="text-center mt-3 d-none">
+                                    <div id="qr-code" class="bg-white p-2 d-inline-block rounded"></div>
+                                    <div class="mt-2">
+                                        <a id="download-qr" href="#" class="btn btn-sm btn-primary" download="qr-code.png">
+                                            <i class="fas fa-download me-1"></i> Download QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="no-result" class="text-center py-4">
+                                <i class="fas fa-link fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter a URL and click "Shorten URL" to generate a short link</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- URL History -->
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h2 class="card-title mb-0">URL History</h2>
+                                <button id="clear-history-btn" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div id="history-container">
+                                <div id="no-history" class="text-center py-3">
+                                    <p class="text-white-50 mb-0">Your shortened URLs will appear here</p>
+                                </div>
+                                <ul id="history-list" class="list-group list-group-flush d-none">
+                                    <!-- History items will be added here dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the URL Shortener</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Enter the long URL you want to shorten in the input field above.</li>
+                        <li class="mb-2">Click the "Shorten URL" button to generate a short link.</li>
+                        <li class="mb-2">Copy the shortened URL using the copy button.</li>
+                        <li class="mb-2">Share the short URL with others or use it in your content.</li>
+                        <li class="mb-2">Optionally, generate a QR code for your shortened URL.</li>
+                    </ol>
+                    <h3 class="mt-4">About URL Shorteners</h3>
+                    <p class="text-white">URL shorteners convert long, unwieldy URLs into brief, easy-to-share links. They're useful for:</p>
+                    <ul class="text-white">
+                        <li><strong>Social Media:</strong> Platforms like Twitter have character limits, making short URLs essential.</li>
+                        <li><strong>Marketing:</strong> Short URLs are easier to remember and type, improving click-through rates.</li>
+                        <li><strong>Analytics:</strong> Many URL shorteners provide click tracking and analytics.</li>
+                        <li><strong>Print Materials:</strong> Short URLs are more practical for printed materials where users need to type the URL manually.</li>
+                        <li><strong>SMS and Messaging:</strong> Short URLs save character space in text messages.</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool uses third-party URL shortening services. The availability and features may depend on these services.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">QR Code Generator</h5>
+                            <p class="card-text flex-grow-1">Generate QR codes for URLs, text, contact information, and more.</p>
+                            <a href="qr-code-generator.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">URL Encoder/Decoder</h5>
+                            <p class="card-text flex-grow-1">Encode or decode URLs to ensure they work properly in all contexts.</p>
+                            <a href="url-encoder-decoder.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Link Checker</h5>
+                            <p class="card-text flex-grow-1">Check if links are working or broken before sharing them.</p>
+                            <a href="link-checker.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Password Generator</h5>
+                            <p class="card-text flex-grow-1">Create strong, secure passwords for your online accounts.</p>
+                            <a href="password-generator.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode.js@1.0.0/qrcode.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const longUrlInput = document.getElementById('long-url');
+            const shortenBtn = document.getElementById('shorten-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const resultContainer = document.getElementById('result-container');
+            const noResult = document.getElementById('no-result');
+            const shortUrlInput = document.getElementById('short-url');
+            const copyBtn = document.getElementById('copy-btn');
+            const visitBtn = document.getElementById('visit-btn');
+            const qrBtn = document.getElementById('qr-btn');
+            const qrContainer = document.getElementById('qr-container');
+            const qrCode = document.getElementById('qr-code');
+            const downloadQr = document.getElementById('download-qr');
+            const customAlias = document.getElementById('custom-alias');
+            const expiration = document.getElementById('expiration');
+            const customDateContainer = document.getElementById('custom-date-container');
+            const customDate = document.getElementById('custom-date');
+            const historyList = document.getElementById('history-list');
+            const noHistory = document.getElementById('no-history');
+            const clearHistoryBtn = document.getElementById('clear-history-btn');
+            
+            // URL history array
+            let urlHistory = JSON.parse(localStorage.getItem('url-shortener-history')) || [];
+            
+            // Initialize history
+            updateHistoryList();
+            
+            // Shorten URL button click handler
+            shortenBtn.addEventListener('click', function() {
+                const longUrl = longUrlInput.value.trim();
+                
+                if (!longUrl) {
+                    showError('Please enter a URL to shorten');
+                    return;
+                }
+                
+                if (!isValidUrl(longUrl)) {
+                    showError('Please enter a valid URL including http:// or https://');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Get selected shortening service
+                const service = document.querySelector('input[name="shortening-service"]:checked').value;
+                
+                // In a real implementation, you would call the appropriate API
+                // For this demo, we'll simulate it with a timeout
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Generate a fake short URL based on the selected service
+                    let shortUrl;
+                    const alias = customAlias.value.trim() || generateRandomString(6);
+                    
+                    switch (service) {
+                        case 'tinyurl':
+                            shortUrl = `https://tinyurl.com/${alias}`;
+                            break;
+                        case 'bitly':
+                            shortUrl = `https://bit.ly/${alias}`;
+                            break;
+                        case 'rebrandly':
+                            shortUrl = `https://rebrand.ly/${alias}`;
+                            break;
+                        default:
+                            shortUrl = `https://short.url/${alias}`;
+                    }
+                    
+                    // Display the result
+                    displayResult(longUrl, shortUrl);
+                    
+                    // Add to history
+                    addToHistory(longUrl, shortUrl);
+                }, 1500);
+            });
+            
+            // Validate URL
+            function isValidUrl(url) {
+                try {
+                    new URL(url);
+                    return true;
+                } catch (e) {
+                    return false;
+                }
+            }
+            
+            // Generate random string for alias
+            function generateRandomString(length) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            }
+            
+            // Display the shortened URL result
+            function displayResult(longUrl, shortUrl) {
+                // Set short URL in input
+                shortUrlInput.value = shortUrl;
+                
+                // Set visit button href
+                visitBtn.href = shortUrl;
+                
+                // Show result container, hide no result message
+                resultContainer.classList.remove('d-none');
+                noResult.classList.add('d-none');
+                
+                // Hide QR code container
+                qrContainer.classList.add('d-none');
+            }
+            
+            // Add URL to history
+            function addToHistory(longUrl, shortUrl) {
+                // Create history item
+                const historyItem = {
+                    longUrl: longUrl,
+                    shortUrl: shortUrl,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Add to history array
+                urlHistory.unshift(historyItem);
+                
+                // Limit history to 10 items
+                if (urlHistory.length > 10) {
+                    urlHistory.pop();
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('url-shortener-history', JSON.stringify(urlHistory));
+                
+                // Update history list
+                updateHistoryList();
+            }
+            
+            // Update history list in UI
+            function updateHistoryList() {
+                if (urlHistory.length === 0) {
+                    // Show no history message
+                    noHistory.classList.remove('d-none');
+                    historyList.classList.add('d-none');
+                    return;
+                }
+                
+                // Clear history list
+                historyList.innerHTML = '';
+                
+                // Add history items
+                urlHistory.forEach((item, index) => {
+                    const historyItem = document.createElement('li');
+                    historyItem.className = 'list-group-item bg-transparent text-white border-light';
+                    
+                    // Format date
+                    const date = new Date(item.timestamp);
+                    const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                    
+                    historyItem.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="text-truncate" style="max-width: 200px;" title="${item.longUrl}">${item.longUrl}</div>
+                                <a href="${item.shortUrl}" target="_blank" class="text-primary">${item.shortUrl}</a>
+                                <div class="text-muted small">${formattedDate}</div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger delete-history-item" data-index="${index}">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    historyList.appendChild(historyItem);
+                });
+                
+                // Show history list, hide no history message
+                noHistory.classList.add('d-none');
+                historyList.classList.remove('d-none');
+                
+                // Add event listeners to delete buttons
+                document.querySelectorAll('.delete-history-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        deleteHistoryItem(index);
+                    });
+                });
+            }
+            
+            // Delete history item
+            function deleteHistoryItem(index) {
+                // Remove item from array
+                urlHistory.splice(index, 1);
+                
+                // Save to localStorage
+                localStorage.setItem('url-shortener-history', JSON.stringify(urlHistory));
+                
+                // Update history list
+                updateHistoryList();
+            }
+            
+            // Clear all history
+            clearHistoryBtn.addEventListener('click', function() {
+                // Confirm before clearing
+                if (confirm('Are you sure you want to clear all URL history?')) {
+                    // Clear history array
+                    urlHistory = [];
+                    
+                    // Save to localStorage
+                    localStorage.setItem('url-shortener-history', JSON.stringify(urlHistory));
+                    
+                    // Update history list
+                    updateHistoryList();
+                }
+            });
+            
+            // Copy button click handler
+            copyBtn.addEventListener('click', function() {
+                // Select the text
+                shortUrlInput.select();
+                shortUrlInput.setSelectionRange(0, 99999); // For mobile devices
+                
+                // Copy to clipboard
+                document.execCommand('copy');
+                
+                // Show feedback
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                }, 2000);
+            });
+            
+            // QR button click handler
+            qrBtn.addEventListener('click', function() {
+                const shortUrl = shortUrlInput.value;
+                
+                if (!shortUrl) {
+                    return;
+                }
+                
+                // Clear previous QR code
+                qrCode.innerHTML = '';
+                
+                // Generate QR code
+                QRCode.toCanvas(qrCode, shortUrl, { width: 200 }, function(error) {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    
+                    // Show QR container
+                    qrContainer.classList.remove('d-none');
+                    
+                    // Set download link
+                    const canvas = qrCode.querySelector('canvas');
+                    downloadQr.href = canvas.toDataURL('image/png');
+                });
+            });
+            
+            // Expiration select change handler
+            expiration.addEventListener('change', function() {
+                if (this.value === 'custom') {
+                    customDateContainer.classList.remove('d-none');
+                } else {
+                    customDateContainer.classList.add('d-none');
+                }
+            });
+            
+            // Set minimum date for custom expiration
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            customDate.min = tomorrow.toISOString().split('T')[0];
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            longUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    shortenBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        #qr-code {
+            display: inline-block;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        #qr-code canvas {
+            display: block;
+        }
+        
+        #history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</body>
+</html> 

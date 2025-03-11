@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URL Encoder & Decoder - NeonTools</title>
+    <title>URL Encoder/Decoder - NeonTools</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Encode or decode URLs for safe transmission over the internet with our free online URL Encoder & Decoder tool.">
+    <meta name="description" content="Encode or decode URLs with our free online URL Encoder/Decoder tool. Ensure your URLs work properly in all contexts.">
     <meta name="keywords" content="url encoder, url decoder, encode url, decode url, url encoding, url decoding">
 </head>
 <body>
@@ -18,8 +18,8 @@
     <main class="container mt-4">
         <!-- Tool Header -->
         <section class="tool-header text-center mb-5">
-            <h1 class="display-4 neon-text">URL Encoder & Decoder</h1>
-            <p class="lead">Encode or decode URLs for safe transmission over the internet</p>
+            <h1 class="display-4 neon-text">URL Encoder/Decoder</h1>
+            <p class="lead">Encode or decode URLs to ensure they work properly in all contexts</p>
         </section>
 
         <!-- Ad Section -->
@@ -33,102 +33,203 @@
         <!-- Tool Content -->
         <section class="tool-content mb-5">
             <div class="row">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="card neon-card">
-                        <div class="card-body">
+                <div class="col-lg-6 mb-4">
+                    <div class="card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
                             <h2 class="card-title mb-4">URL Encoder</h2>
-                            <textarea id="encode-input" class="form-control mb-4" rows="6" placeholder="Enter text to encode..."></textarea>
+                            <div class="mb-3 flex-grow-1">
+                                <label for="encode-input" class="form-label text-white">Enter text to encode:</label>
+                                <textarea id="encode-input" class="form-control mb-3" rows="6" placeholder="Enter text or URL to encode..."></textarea>
+                                <div class="form-text text-white mb-3">
+                                    <i class="fas fa-info-circle me-1"></i> Special characters will be converted to their URL-encoded equivalents
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <button id="clear-encode-btn" class="btn btn-danger">Clear</button>
                                 <div>
-                                    <button id="encode-component-btn" class="btn btn-secondary me-2">Encode Components</button>
+                                    <button id="encode-component-btn" class="btn btn-secondary me-2">Encode Components Only</button>
                                     <button id="encode-btn" class="btn btn-primary">Encode URL</button>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <h3 class="mb-3">Encoded Result</h3>
-                                <div id="encode-result" class="form-control bg-dark text-white" style="min-height: 100px; overflow-wrap: break-word;"></div>
-                                <div class="d-flex justify-content-end mt-2">
-                                    <button id="copy-encode-btn" class="btn btn-primary">Copy Result</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card neon-card">
-                        <div class="card-body">
+                <div class="col-lg-6 mb-4">
+                    <div class="card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
                             <h2 class="card-title mb-4">URL Decoder</h2>
-                            <textarea id="decode-input" class="form-control mb-4" rows="6" placeholder="Enter URL to decode..."></textarea>
+                            <div class="mb-3 flex-grow-1">
+                                <label for="decode-input" class="form-label text-white">Enter text to decode:</label>
+                                <textarea id="decode-input" class="form-control mb-3" rows="6" placeholder="Enter encoded text or URL to decode..."></textarea>
+                                <div class="form-text text-white mb-3">
+                                    <i class="fas fa-info-circle me-1"></i> URL-encoded characters (like %20) will be converted back to their original form
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-between">
                                 <button id="clear-decode-btn" class="btn btn-danger">Clear</button>
                                 <div>
-                                    <button id="decode-component-btn" class="btn btn-secondary me-2">Decode Components</button>
+                                    <button id="decode-component-btn" class="btn btn-secondary me-2">Decode Components Only</button>
                                     <button id="decode-btn" class="btn btn-primary">Decode URL</button>
-                                </div>
-                            </div>
-                            <div class="mt-4">
-                                <h3 class="mb-3">Decoded Result</h3>
-                                <div id="decode-result" class="form-control bg-dark text-white" style="min-height: 100px; overflow-wrap: break-word;"></div>
-                                <div class="d-flex justify-content-end mt-2">
-                                    <button id="copy-decode-btn" class="btn btn-primary">Copy Result</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- URL Parser Section -->
-        <section class="url-parser mb-5">
-            <div class="card neon-card">
-                <div class="card-body">
-                    <h2 class="card-title mb-4">URL Parser</h2>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="input-group mb-4">
-                                <input type="text" id="url-to-parse" class="form-control" placeholder="Enter a URL to parse...">
-                                <button id="parse-url-btn" class="btn btn-primary">Parse URL</button>
+            
+            <!-- Results Section -->
+            <div class="row mt-4">
+                <div class="col-lg-6 mb-4">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Encoded Result</h2>
+                            <div class="mb-3">
+                                <textarea id="encode-result" class="form-control mb-3" rows="6" readonly></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button id="copy-encode-btn" class="btn btn-primary">
+                                    <i class="fas fa-copy me-2"></i> Copy Result
+                                </button>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <button id="parse-current-url-btn" class="btn btn-secondary w-100">Parse Current Page URL</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Decoded Result</h2>
+                            <div class="mb-3">
+                                <textarea id="decode-result" class="form-control mb-3" rows="6" readonly></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button id="copy-decode-btn" class="btn btn-primary">
+                                    <i class="fas fa-copy me-2"></i> Copy Result
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div id="parsed-url-container" class="d-none">
-                        <h3 class="mb-3">Parsed URL Components</h3>
-                        <table class="table table-dark table-striped">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Protocol</th>
-                                    <td id="parsed-protocol"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Hostname</th>
-                                    <td id="parsed-hostname"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Port</th>
-                                    <td id="parsed-port"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Path</th>
-                                    <td id="parsed-pathname"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Query String</th>
-                                    <td id="parsed-search"></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Hash</th>
-                                    <td id="parsed-hash"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h3 class="mb-3 mt-4">Query Parameters</h3>
-                        <div id="query-params-container">
-                            <p class="text-white">No query parameters found.</p>
+                </div>
+            </div>
+            
+            <!-- Character Reference Table -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Common URL Encoded Characters</h2>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Character</th>
+                                            <th>URL Encoded</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Space</td>
+                                            <td>%20</td>
+                                            <td>Space character</td>
+                                        </tr>
+                                        <tr>
+                                            <td>!</td>
+                                            <td>%21</td>
+                                            <td>Exclamation mark</td>
+                                        </tr>
+                                        <tr>
+                                            <td>"</td>
+                                            <td>%22</td>
+                                            <td>Double quote</td>
+                                        </tr>
+                                        <tr>
+                                            <td>#</td>
+                                            <td>%23</td>
+                                            <td>Number sign (hash)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>$</td>
+                                            <td>%24</td>
+                                            <td>Dollar sign</td>
+                                        </tr>
+                                        <tr>
+                                            <td>%</td>
+                                            <td>%25</td>
+                                            <td>Percent sign</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&</td>
+                                            <td>%26</td>
+                                            <td>Ampersand</td>
+                                        </tr>
+                                        <tr>
+                                            <td>'</td>
+                                            <td>%27</td>
+                                            <td>Single quote</td>
+                                        </tr>
+                                        <tr>
+                                            <td>(</td>
+                                            <td>%28</td>
+                                            <td>Opening parenthesis</td>
+                                        </tr>
+                                        <tr>
+                                            <td>)</td>
+                                            <td>%29</td>
+                                            <td>Closing parenthesis</td>
+                                        </tr>
+                                        <tr>
+                                            <td>+</td>
+                                            <td>%2B</td>
+                                            <td>Plus sign</td>
+                                        </tr>
+                                        <tr>
+                                            <td>,</td>
+                                            <td>%2C</td>
+                                            <td>Comma</td>
+                                        </tr>
+                                        <tr>
+                                            <td>/</td>
+                                            <td>%2F</td>
+                                            <td>Forward slash</td>
+                                        </tr>
+                                        <tr>
+                                            <td>:</td>
+                                            <td>%3A</td>
+                                            <td>Colon</td>
+                                        </tr>
+                                        <tr>
+                                            <td>;</td>
+                                            <td>%3B</td>
+                                            <td>Semicolon</td>
+                                        </tr>
+                                        <tr>
+                                            <td>=</td>
+                                            <td>%3D</td>
+                                            <td>Equals sign</td>
+                                        </tr>
+                                        <tr>
+                                            <td>?</td>
+                                            <td>%3F</td>
+                                            <td>Question mark</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@</td>
+                                            <td>%40</td>
+                                            <td>At sign</td>
+                                        </tr>
+                                        <tr>
+                                            <td>[</td>
+                                            <td>%5B</td>
+                                            <td>Opening bracket</td>
+                                        </tr>
+                                        <tr>
+                                            <td>]</td>
+                                            <td>%5D</td>
+                                            <td>Closing bracket</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -139,22 +240,25 @@
         <section class="how-to-use mb-5">
             <div class="card neon-card">
                 <div class="card-body">
-                    <h2 class="card-title mb-4">How to Use the URL Encoder & Decoder Tool</h2>
+                    <h2 class="card-title mb-4">How to Use the URL Encoder/Decoder</h2>
                     <ol class="text-white">
-                        <li class="mb-2">To encode a URL, enter the text in the URL Encoder section and click "Encode URL" or "Encode Components".</li>
-                        <li class="mb-2">To decode a URL, enter the encoded URL in the URL Decoder section and click "Decode URL" or "Decode Components".</li>
-                        <li class="mb-2">Use the URL Parser to break down a URL into its components and query parameters.</li>
-                        <li class="mb-2">Use the "Copy Result" buttons to copy the encoded or decoded text to your clipboard.</li>
+                        <li class="mb-2"><strong>To Encode a URL:</strong> Enter the text or URL in the "URL Encoder" section and click "Encode URL" button.</li>
+                        <li class="mb-2"><strong>To Decode a URL:</strong> Enter the encoded text or URL in the "URL Decoder" section and click "Decode URL" button.</li>
+                        <li class="mb-2"><strong>Component Encoding/Decoding:</strong> Use the "Encode/Decode Components Only" buttons to encode or decode only the components of a URL (like query parameters) without affecting the entire URL structure.</li>
+                        <li class="mb-2"><strong>Copy Results:</strong> Use the "Copy Result" buttons to copy the encoded or decoded text to your clipboard.</li>
                     </ol>
                     <h3 class="mt-4">About URL Encoding</h3>
                     <p class="text-white">URL encoding, also known as percent-encoding, is a mechanism for encoding information in a Uniform Resource Identifier (URI) under certain circumstances. URL encoding is used when placing text in a query string to avoid it being interpreted as URL syntax. It's also used to handle URLs that contain characters outside the ASCII set.</p>
                     <p class="text-white">Key points about URL encoding:</p>
                     <ul class="text-white">
-                        <li>Reserved characters like <code>?</code>, <code>/</code>, <code>:</code>, <code>@</code>, and <code>&</code> are encoded when they're part of the data, not when they're used as delimiters.</li>
-                        <li>Spaces are either encoded as <code>%20</code> or replaced with <code>+</code> (in query strings).</li>
-                        <li>Non-ASCII characters are first encoded as UTF-8, then each byte is percent-encoded.</li>
-                        <li>The <code>encodeURI()</code> function encodes a complete URI, while <code>encodeURIComponent()</code> encodes a URI component like a query parameter.</li>
+                        <li><strong>Reserved Characters:</strong> Characters like ?, &, =, /, :, and others have special meanings in URLs and need to be encoded when used as data.</li>
+                        <li><strong>Encoding Format:</strong> URL encoding replaces unsafe ASCII characters with a "%" followed by two hexadecimal digits corresponding to the character's ASCII value.</li>
+                        <li><strong>Space Character:</strong> Spaces are either encoded as %20 or replaced with a plus sign (+) in query parameters.</li>
+                        <li><strong>Encoding vs. Component Encoding:</strong> Regular encoding preserves certain URL-specific characters, while component encoding encodes all special characters.</li>
                     </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> URL encoding is essential for ensuring that URLs with special characters work correctly in all contexts, including web forms, APIs, and browser address bars.
+                    </div>
                 </div>
             </div>
         </section>
@@ -166,26 +270,8 @@
                 <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="card tool-card neon-card h-100">
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">Base64 Encoder & Decoder</h5>
-                            <p class="card-text flex-grow-1">Encode or decode text and files to/from Base64 format.</p>
-                            <a href="base64-encoder-decoder.html" class="btn btn-primary mt-auto">Use Tool</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-                    <div class="card tool-card neon-card h-100">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">HTML Encoder & Decoder</h5>
-                            <p class="card-text flex-grow-1">Encode or decode HTML entities in your text.</p>
-                            <a href="html-encoder-decoder.html" class="btn btn-primary mt-auto">Use Tool</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-                    <div class="card tool-card neon-card h-100">
-                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">URL Shortener</h5>
-                            <p class="card-text flex-grow-1">Shorten long URLs for easier sharing and tracking.</p>
+                            <p class="card-text flex-grow-1">Create short, shareable links from long URLs.</p>
                             <a href="url-shortener.html" class="btn btn-primary mt-auto">Use Tool</a>
                         </div>
                     </div>
@@ -193,8 +279,26 @@
                 <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="card tool-card neon-card h-100">
                         <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Base64 Encoder/Decoder</h5>
+                            <p class="card-text flex-grow-1">Encode or decode text using Base64 encoding.</p>
+                            <a href="base64-encoder-decoder.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">HTML Encoder/Decoder</h5>
+                            <p class="card-text flex-grow-1">Convert text to HTML entities and vice versa.</p>
+                            <a href="html-encoder-decoder.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title">JSON Formatter</h5>
-                            <p class="card-text flex-grow-1">Format and validate JSON data with syntax highlighting.</p>
+                            <p class="card-text flex-grow-1">Format, validate and beautify your JSON data.</p>
                             <a href="json-formatter.html" class="btn btn-primary mt-auto">Use Tool</a>
                         </div>
                     </div>
@@ -233,198 +337,140 @@
         }, true);
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Encoder elements
+            // Get DOM elements - Encode
             const encodeInput = document.getElementById('encode-input');
+            const encodeResult = document.getElementById('encode-result');
             const encodeBtn = document.getElementById('encode-btn');
             const encodeComponentBtn = document.getElementById('encode-component-btn');
             const clearEncodeBtn = document.getElementById('clear-encode-btn');
-            const encodeResult = document.getElementById('encode-result');
             const copyEncodeBtn = document.getElementById('copy-encode-btn');
             
-            // Decoder elements
+            // Get DOM elements - Decode
             const decodeInput = document.getElementById('decode-input');
+            const decodeResult = document.getElementById('decode-result');
             const decodeBtn = document.getElementById('decode-btn');
             const decodeComponentBtn = document.getElementById('decode-component-btn');
             const clearDecodeBtn = document.getElementById('clear-decode-btn');
-            const decodeResult = document.getElementById('decode-result');
             const copyDecodeBtn = document.getElementById('copy-decode-btn');
             
-            // URL Parser elements
-            const urlToParseInput = document.getElementById('url-to-parse');
-            const parseUrlBtn = document.getElementById('parse-url-btn');
-            const parseCurrentUrlBtn = document.getElementById('parse-current-url-btn');
-            const parsedUrlContainer = document.getElementById('parsed-url-container');
-            const parsedProtocol = document.getElementById('parsed-protocol');
-            const parsedHostname = document.getElementById('parsed-hostname');
-            const parsedPort = document.getElementById('parsed-port');
-            const parsedPathname = document.getElementById('parsed-pathname');
-            const parsedSearch = document.getElementById('parsed-search');
-            const parsedHash = document.getElementById('parsed-hash');
-            const queryParamsContainer = document.getElementById('query-params-container');
-            
-            // Encode URL
+            // Encode URL button click handler
             encodeBtn.addEventListener('click', function() {
-                try {
-                    const input = encodeInput.value.trim();
-                    if (!input) {
-                        encodeResult.textContent = 'Please enter text to encode.';
-                        return;
+                const input = encodeInput.value.trim();
+                if (input) {
+                    try {
+                        encodeResult.value = encodeURI(input);
+                    } catch (e) {
+                        encodeResult.value = 'Error: ' + e.message;
                     }
-                    
-                    const encoded = encodeURI(input);
-                    encodeResult.textContent = encoded;
-                } catch (error) {
-                    encodeResult.textContent = `Error: ${error.message}`;
                 }
             });
             
-            // Encode URL Components
+            // Encode URL Component button click handler
             encodeComponentBtn.addEventListener('click', function() {
-                try {
-                    const input = encodeInput.value.trim();
-                    if (!input) {
-                        encodeResult.textContent = 'Please enter text to encode.';
-                        return;
+                const input = encodeInput.value.trim();
+                if (input) {
+                    try {
+                        encodeResult.value = encodeURIComponent(input);
+                    } catch (e) {
+                        encodeResult.value = 'Error: ' + e.message;
                     }
-                    
-                    const encoded = encodeURIComponent(input);
-                    encodeResult.textContent = encoded;
-                } catch (error) {
-                    encodeResult.textContent = `Error: ${error.message}`;
                 }
             });
             
-            // Clear Encode
+            // Clear Encode button click handler
             clearEncodeBtn.addEventListener('click', function() {
                 encodeInput.value = '';
-                encodeResult.textContent = '';
+                encodeResult.value = '';
             });
             
-            // Copy Encode Result
+            // Copy Encode Result button click handler
             copyEncodeBtn.addEventListener('click', function() {
-                const result = encodeResult.textContent;
-                if (!result) return;
-                
-                navigator.clipboard.writeText(result)
-                    .then(() => {
-                        const originalText = copyEncodeBtn.textContent;
-                        copyEncodeBtn.textContent = 'Copied!';
-                        setTimeout(() => {
-                            copyEncodeBtn.textContent = originalText;
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy text: ', err);
-                    });
+                if (encodeResult.value) {
+                    encodeResult.select();
+                    document.execCommand('copy');
+                    
+                    // Show feedback
+                    const originalHTML = copyEncodeBtn.innerHTML;
+                    copyEncodeBtn.innerHTML = '<i class="fas fa-check me-2"></i> Copied!';
+                    setTimeout(() => {
+                        copyEncodeBtn.innerHTML = originalHTML;
+                    }, 2000);
+                }
             });
             
-            // Decode URL
+            // Decode URL button click handler
             decodeBtn.addEventListener('click', function() {
-                try {
-                    const input = decodeInput.value.trim();
-                    if (!input) {
-                        decodeResult.textContent = 'Please enter a URL to decode.';
-                        return;
+                const input = decodeInput.value.trim();
+                if (input) {
+                    try {
+                        decodeResult.value = decodeURI(input);
+                    } catch (e) {
+                        decodeResult.value = 'Error: ' + e.message;
                     }
-                    
-                    const decoded = decodeURI(input);
-                    decodeResult.textContent = decoded;
-                } catch (error) {
-                    decodeResult.textContent = `Error: ${error.message}`;
                 }
             });
             
-            // Decode URL Components
+            // Decode URL Component button click handler
             decodeComponentBtn.addEventListener('click', function() {
-                try {
-                    const input = decodeInput.value.trim();
-                    if (!input) {
-                        decodeResult.textContent = 'Please enter a URL to decode.';
-                        return;
+                const input = decodeInput.value.trim();
+                if (input) {
+                    try {
+                        decodeResult.value = decodeURIComponent(input);
+                    } catch (e) {
+                        decodeResult.value = 'Error: ' + e.message;
                     }
-                    
-                    const decoded = decodeURIComponent(input);
-                    decodeResult.textContent = decoded;
-                } catch (error) {
-                    decodeResult.textContent = `Error: ${error.message}`;
                 }
             });
             
-            // Clear Decode
+            // Clear Decode button click handler
             clearDecodeBtn.addEventListener('click', function() {
                 decodeInput.value = '';
-                decodeResult.textContent = '';
+                decodeResult.value = '';
             });
             
-            // Copy Decode Result
+            // Copy Decode Result button click handler
             copyDecodeBtn.addEventListener('click', function() {
-                const result = decodeResult.textContent;
-                if (!result) return;
-                
-                navigator.clipboard.writeText(result)
-                    .then(() => {
-                        const originalText = copyDecodeBtn.textContent;
-                        copyDecodeBtn.textContent = 'Copied!';
-                        setTimeout(() => {
-                            copyDecodeBtn.textContent = originalText;
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy text: ', err);
-                    });
-            });
-            
-            // Parse URL
-            parseUrlBtn.addEventListener('click', function() {
-                parseUrl(urlToParseInput.value.trim());
-            });
-            
-            // Parse Current URL
-            parseCurrentUrlBtn.addEventListener('click', function() {
-                urlToParseInput.value = window.location.href;
-                parseUrl(window.location.href);
-            });
-            
-            // Function to parse URL
-            function parseUrl(url) {
-                if (!url) {
-                    alert('Please enter a URL to parse.');
-                    return;
+                if (decodeResult.value) {
+                    decodeResult.select();
+                    document.execCommand('copy');
+                    
+                    // Show feedback
+                    const originalHTML = copyDecodeBtn.innerHTML;
+                    copyDecodeBtn.innerHTML = '<i class="fas fa-check me-2"></i> Copied!';
+                    setTimeout(() => {
+                        copyDecodeBtn.innerHTML = originalHTML;
+                    }, 2000);
                 }
-                
-                try {
-                    // Create URL object
-                    const urlObj = new URL(url);
-                    
-                    // Display URL components
-                    parsedProtocol.textContent = urlObj.protocol;
-                    parsedHostname.textContent = urlObj.hostname;
-                    parsedPort.textContent = urlObj.port || '(default)';
-                    parsedPathname.textContent = urlObj.pathname;
-                    parsedSearch.textContent = urlObj.search;
-                    parsedHash.textContent = urlObj.hash;
-                    
-                    // Parse query parameters
-                    const searchParams = urlObj.searchParams;
-                    if (searchParams.toString()) {
-                        let paramsHtml = '<table class="table table-dark table-striped"><thead><tr><th>Parameter</th><th>Value</th></tr></thead><tbody>';
-                        
-                        searchParams.forEach((value, key) => {
-                            paramsHtml += `<tr><td>${key}</td><td>${value}</td></tr>`;
-                        });
-                        
-                        paramsHtml += '</tbody></table>';
-                        queryParamsContainer.innerHTML = paramsHtml;
-                    } else {
-                        queryParamsContainer.innerHTML = '<p class="text-white">No query parameters found.</p>';
-                    }
-                    
-                    // Show parsed URL container
-                    parsedUrlContainer.classList.remove('d-none');
-                } catch (error) {
-                    alert(`Invalid URL: ${error.message}`);
+            });
+            
+            // Handle Enter key press in input fields
+            encodeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    encodeBtn.click();
                 }
-            }
+            });
+            
+            decodeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    decodeBtn.click();
+                }
+            });
+            
+            // Add example URL to encode input on double-click
+            encodeInput.addEventListener('dblclick', function() {
+                if (!this.value) {
+                    this.value = 'https://example.com/path?name=John Doe&age=25&interests=coding,music,travel';
+                }
+            });
+            
+            // Add example encoded URL to decode input on double-click
+            decodeInput.addEventListener('dblclick', function() {
+                if (!this.value) {
+                    this.value = 'https://example.com/path?name=John%20Doe&age=25&interests=coding%2Cmusic%2Ctravel';
+                }
+            });
         });
     </script>
     <style>
@@ -465,11 +511,9 @@
             }
         }
         
-        code {
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 2px 4px;
-            border-radius: 3px;
-            color: #00ffff;
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
         }
     </style>
 </body>
