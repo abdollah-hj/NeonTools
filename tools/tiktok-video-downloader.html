@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Video Downloader - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download videos from TikTok without watermark with our free online TikTok Video Downloader tool.">
+    <meta name="keywords" content="tiktok video downloader, download tiktok videos, tiktok downloader no watermark, save tiktok videos">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">TikTok Video Downloader</h1>
+            <p class="lead">Download videos from TikTok without watermark</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter TikTok Video URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="text" id="tiktok-url" class="form-control" placeholder="https://www.tiktok.com/@username/video/1234567890">
+                                <button id="get-video-btn" class="btn btn-primary">Get Video</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Paste the URL of a TikTok video
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Fetching video...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Video Information</h2>
+                            <div id="video-info" class="d-none">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="user-avatar" src="" alt="User Avatar" class="img-fluid rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div>
+                                        <h5 id="user-name" class="mb-1"></h5>
+                                        <p id="user-handle" class="mb-1 text-muted"></p>
+                                    </div>
+                                </div>
+                                <p id="video-caption" class="mt-3 mb-0"></p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="me-3">
+                                        <i class="fas fa-heart text-danger"></i>
+                                        <span id="like-count" class="ms-1">0</span>
+                                    </div>
+                                    <div class="me-3">
+                                        <i class="fas fa-comment text-primary"></i>
+                                        <span id="comment-count" class="ms-1">0</span>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-share text-success"></i>
+                                        <span id="share-count" class="ms-1">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="no-video-info" class="text-center py-4">
+                                <i class="fab fa-tiktok fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter a TikTok video URL to see information and download video</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video-section" class="video-section mb-5 d-none">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Available Video</h2>
+                    <div class="row">
+                        <div class="col-lg-8 mb-4 mb-lg-0">
+                            <div id="video-container" class="text-center">
+                                <!-- Video will be added here dynamically -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card neon-card h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-3">Download Options</h3>
+                                    <div id="download-options">
+                                        <div class="mb-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>No Watermark</span>
+                                                <span class="badge bg-success">HD</span>
+                                            </div>
+                                            <a id="download-no-watermark" href="#" class="btn btn-primary w-100 mb-3" download="tiktok-video-no-watermark.mp4" target="_blank">
+                                                <i class="fas fa-download me-2"></i> Download Without Watermark
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>With Watermark</span>
+                                                <span class="badge bg-secondary">Original</span>
+                                            </div>
+                                            <a id="download-with-watermark" href="#" class="btn btn-outline-primary w-100" download="tiktok-video-with-watermark.mp4" target="_blank">
+                                                <i class="fas fa-download me-2"></i> Download With Watermark
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="disclaimer-section mb-5">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i> Important Disclaimer</h4>
+                <p>This tool is for personal use only. Please respect copyright and privacy rights when downloading and using TikTok content.</p>
+                <hr>
+                <p class="mb-0">TikTok's terms of service may restrict automated downloading of content. Use this tool responsibly and ethically.</p>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the TikTok Video Downloader</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Open the TikTok app or website and find the video you want to download.</li>
+                        <li class="mb-2">Tap the "Share" button and select "Copy Link" (in the app) or copy the URL from your browser's address bar.</li>
+                        <li class="mb-2">Paste the URL in the input field above.</li>
+                        <li class="mb-2">Click the "Get Video" button.</li>
+                        <li class="mb-2">Once the video loads, click "Download Without Watermark" to save the video without the TikTok watermark.</li>
+                    </ol>
+                    <h3 class="mt-4">About TikTok Videos</h3>
+                    <p class="text-white">TikTok is a popular social media platform for creating and sharing short-form videos. Key points about TikTok videos:</p>
+                    <ul class="text-white">
+                        <li><strong>Video Length:</strong> TikTok videos can be up to 10 minutes long, though most are shorter.</li>
+                        <li><strong>Watermark:</strong> TikTok adds a watermark with the creator's username that bounces around the video.</li>
+                        <li><strong>Video Quality:</strong> TikTok videos are typically available in multiple qualities, with the highest being 1080p.</li>
+                        <li><strong>Music and Sounds:</strong> TikTok videos often include music or sound effects that are part of the video file.</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool works with public TikTok videos only. Private videos cannot be accessed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">YouTube Thumbnail Downloader</h5>
+                            <p class="card-text flex-grow-1">Download thumbnails from YouTube videos in high resolution.</p>
+                            <a href="youtube-thumbnail-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Instagram Photo Downloader</h5>
+                            <p class="card-text flex-grow-1">Download photos and videos from Instagram posts.</p>
+                            <a href="instagram-photo-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Twitter Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Twitter posts and tweets.</p>
+                            <a href="twitter-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Facebook Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Facebook posts and pages.</p>
+                            <a href="facebook-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const tiktokUrlInput = document.getElementById('tiktok-url');
+            const getVideoBtn = document.getElementById('get-video-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const videoInfo = document.getElementById('video-info');
+            const noVideoInfo = document.getElementById('no-video-info');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            const userHandle = document.getElementById('user-handle');
+            const videoCaption = document.getElementById('video-caption');
+            const likeCount = document.getElementById('like-count');
+            const commentCount = document.getElementById('comment-count');
+            const shareCount = document.getElementById('share-count');
+            const videoSection = document.getElementById('video-section');
+            const videoContainer = document.getElementById('video-container');
+            const downloadNoWatermark = document.getElementById('download-no-watermark');
+            const downloadWithWatermark = document.getElementById('download-with-watermark');
+            
+            // Sample video URL for demonstration
+            const sampleVideoUrl = 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4';
+            
+            // Get video button click handler
+            getVideoBtn.addEventListener('click', function() {
+                const tiktokUrl = tiktokUrlInput.value.trim();
+                
+                if (!tiktokUrl) {
+                    showError('Please enter a TikTok video URL');
+                    return;
+                }
+                
+                // Validate TikTok URL
+                if (!isValidTikTokUrl(tiktokUrl)) {
+                    showError('Invalid TikTok URL. Please enter a valid TikTok video URL');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Simulate API call (in a real app, you would fetch data from TikTok API or scrape the page)
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Display video info
+                    displayVideoInfo();
+                    
+                    // Display video
+                    displayVideo(sampleVideoUrl);
+                }, 1500);
+            });
+            
+            // Validate TikTok URL
+            function isValidTikTokUrl(url) {
+                // Regular expression to match TikTok video URLs
+                const regExp = /^https?:\/\/(www\.|vm\.|vt\.)?tiktok\.com\/(@[a-zA-Z0-9_.]+\/video\/[0-9]+|[a-zA-Z0-9]+)/;
+                return regExp.test(url);
+            }
+            
+            // Display video information
+            function displayVideoInfo() {
+                // Set user avatar (placeholder)
+                userAvatar.src = 'https://source.unsplash.com/random/60x60?person';
+                
+                // Set user name (placeholder)
+                userName.textContent = 'TikTok User';
+                
+                // Set user handle (placeholder)
+                userHandle.textContent = '@tiktok_user';
+                
+                // Set video caption (placeholder)
+                videoCaption.textContent = 'This is a sample TikTok video caption. Check out this amazing content! #tiktok #video #neontools';
+                
+                // Set engagement counts (placeholder)
+                likeCount.textContent = formatNumber(Math.floor(Math.random() * 1000000));
+                commentCount.textContent = formatNumber(Math.floor(Math.random() * 50000));
+                shareCount.textContent = formatNumber(Math.floor(Math.random() * 100000));
+                
+                // Show video info, hide no video info
+                videoInfo.classList.remove('d-none');
+                noVideoInfo.classList.add('d-none');
+            }
+            
+            // Display video
+            function displayVideo(videoUrl) {
+                // Clear previous video
+                videoContainer.innerHTML = '';
+                
+                // Display video
+                videoContainer.innerHTML = `
+                    <video src="${videoUrl}" controls loop class="img-fluid rounded mb-3 max-height-600"></video>
+                `;
+                
+                // Set download links
+                downloadNoWatermark.href = videoUrl;
+                downloadWithWatermark.href = videoUrl;
+                
+                // Show video section
+                videoSection.classList.remove('d-none');
+            }
+            
+            // Format number with K, M, B suffixes
+            function formatNumber(num) {
+                if (num >= 1000000000) {
+                    return (num / 1000000000).toFixed(1) + 'B';
+                }
+                if (num >= 1000000) {
+                    return (num / 1000000).toFixed(1) + 'M';
+                }
+                if (num >= 1000) {
+                    return (num / 1000).toFixed(1) + 'K';
+                }
+                return num.toString();
+            }
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            tiktokUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getVideoBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        .max-height-600 {
+            max-height: 600px;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Photo Downloader - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download photos and videos from Instagram posts with our free online Instagram Photo Downloader tool.">
+    <meta name="keywords" content="instagram photo downloader, instagram video downloader, download instagram photos, instagram media downloader">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">Instagram Photo Downloader</h1>
+            <p class="lead">Download photos and videos from Instagram posts</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter Instagram Post URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="text" id="instagram-url" class="form-control" placeholder="https://www.instagram.com/p/XXXXXXXXXX/">
+                                <button id="get-media-btn" class="btn btn-primary">Get Media</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Paste the URL of an Instagram post
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Fetching media...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Post Information</h2>
+                            <div id="post-info" class="d-none">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="post-thumbnail" src="" alt="Post Thumbnail" class="img-fluid rounded me-3" style="width: 120px; height: 120px; object-fit: cover;">
+                                    <div>
+                                        <h5 id="post-username" class="mb-1"></h5>
+                                        <p id="post-caption" class="mb-1 small text-truncate"></p>
+                                        <p id="post-type" class="mb-0 small text-muted"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="no-post-info" class="text-center py-4">
+                                <i class="fab fa-instagram fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter an Instagram post URL to see information and download media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Section -->
+        <section id="media-section" class="media-section mb-5 d-none">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Available Media</h2>
+                    <div id="media-container" class="text-center">
+                        <!-- Media will be added here dynamically -->
+                    </div>
+                    <div class="text-center mt-4">
+                        <a id="download-btn" href="#" class="btn btn-primary btn-lg" download="instagram-media.jpg" target="_blank">
+                            <i class="fas fa-download me-2"></i> Download Media
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="disclaimer-section mb-5">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i> Important Disclaimer</h4>
+                <p>This tool is for personal use only. Please respect copyright and privacy rights when downloading and using Instagram content.</p>
+                <hr>
+                <p class="mb-0">Instagram's terms of service may restrict automated downloading of content. Use this tool responsibly and ethically.</p>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the Instagram Photo Downloader</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Open Instagram in your browser or app and navigate to the post you want to download.</li>
+                        <li class="mb-2">Copy the URL of the post from the address bar (or use the "Share" > "Copy Link" option in the app).</li>
+                        <li class="mb-2">Paste the URL in the input field above.</li>
+                        <li class="mb-2">Click the "Get Media" button.</li>
+                        <li class="mb-2">Once the media loads, click the "Download Media" button to save it to your device.</li>
+                    </ol>
+                    <h3 class="mt-4">About Instagram Media</h3>
+                    <p class="text-white">Instagram hosts various types of media content:</p>
+                    <ul class="text-white">
+                        <li><strong>Photos:</strong> Single image posts.</li>
+                        <li><strong>Videos:</strong> Video content up to 60 seconds (feed posts) or longer (IGTV).</li>
+                        <li><strong>Carousels:</strong> Multiple photos or videos in a single post that users can swipe through.</li>
+                        <li><strong>Stories:</strong> Temporary content that disappears after 24 hours (not supported by this tool).</li>
+                        <li><strong>Reels:</strong> Short-form videos similar to TikTok.</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool works with public Instagram posts only. Private posts cannot be accessed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">YouTube Thumbnail Downloader</h5>
+                            <p class="card-text flex-grow-1">Download thumbnails from YouTube videos in high resolution.</p>
+                            <a href="youtube-thumbnail-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Twitter Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Twitter posts and tweets.</p>
+                            <a href="twitter-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Facebook Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Facebook posts and pages.</p>
+                            <a href="facebook-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">TikTok Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from TikTok without watermark.</p>
+                            <a href="tiktok-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const instagramUrlInput = document.getElementById('instagram-url');
+            const getMediaBtn = document.getElementById('get-media-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const postInfo = document.getElementById('post-info');
+            const noPostInfo = document.getElementById('no-post-info');
+            const postThumbnail = document.getElementById('post-thumbnail');
+            const postUsername = document.getElementById('post-username');
+            const postCaption = document.getElementById('post-caption');
+            const postType = document.getElementById('post-type');
+            const mediaSection = document.getElementById('media-section');
+            const mediaContainer = document.getElementById('media-container');
+            const downloadBtn = document.getElementById('download-btn');
+            
+            // Sample media URLs for demonstration
+            const sampleMedia = [
+                {
+                    type: 'image',
+                    url: 'https://source.unsplash.com/random/800x800?instagram',
+                    thumbnail: 'https://source.unsplash.com/random/120x120?instagram'
+                },
+                {
+                    type: 'video',
+                    url: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4',
+                    thumbnail: 'https://source.unsplash.com/random/120x120?video'
+                },
+                {
+                    type: 'carousel',
+                    items: [
+                        { type: 'image', url: 'https://source.unsplash.com/random/800x800?instagram,1' },
+                        { type: 'image', url: 'https://source.unsplash.com/random/800x800?instagram,2' },
+                        { type: 'image', url: 'https://source.unsplash.com/random/800x800?instagram,3' }
+                    ],
+                    thumbnail: 'https://source.unsplash.com/random/120x120?carousel'
+                }
+            ];
+            
+            // Get media button click handler
+            getMediaBtn.addEventListener('click', function() {
+                const instagramUrl = instagramUrlInput.value.trim();
+                
+                if (!instagramUrl) {
+                    showError('Please enter an Instagram post URL');
+                    return;
+                }
+                
+                // Validate Instagram URL
+                if (!isValidInstagramUrl(instagramUrl)) {
+                    showError('Invalid Instagram URL. Please enter a valid Instagram post URL');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Simulate API call (in a real app, you would fetch data from Instagram API or scrape the page)
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // For demo purposes, randomly select a sample media type
+                    const randomIndex = Math.floor(Math.random() * sampleMedia.length);
+                    const media = sampleMedia[randomIndex];
+                    
+                    // Display post info
+                    displayPostInfo(media, instagramUrl);
+                    
+                    // Display media
+                    displayMedia(media);
+                }, 1500);
+            });
+            
+            // Validate Instagram URL
+            function isValidInstagramUrl(url) {
+                // Regular expression to match Instagram post URLs
+                const regExp = /^https?:\/\/(www\.)?instagram\.com\/(p|reel|tv)\/([^/?#&]+)/;
+                return regExp.test(url);
+            }
+            
+            // Extract post ID from Instagram URL
+            function extractPostId(url) {
+                const match = url.match(/\/(p|reel|tv)\/([^/?#&]+)/);
+                return match ? match[2] : null;
+            }
+            
+            // Display post information
+            function displayPostInfo(media, url) {
+                // Set post thumbnail
+                postThumbnail.src = media.thumbnail;
+                
+                // Set post username (placeholder)
+                postUsername.textContent = '@instagram_user';
+                
+                // Set post caption (placeholder)
+                postCaption.textContent = 'This is a sample Instagram post caption. #instagram #photo #neontools';
+                
+                // Set post type
+                postType.textContent = `Type: ${media.type.charAt(0).toUpperCase() + media.type.slice(1)}`;
+                
+                // Show post info, hide no post info
+                postInfo.classList.remove('d-none');
+                noPostInfo.classList.add('d-none');
+            }
+            
+            // Display media
+            function displayMedia(media) {
+                // Clear previous media
+                mediaContainer.innerHTML = '';
+                
+                if (media.type === 'image') {
+                    // Display image
+                    mediaContainer.innerHTML = `
+                        <img src="${media.url}" class="img-fluid rounded mb-3 max-height-600" alt="Instagram Photo">
+                    `;
+                    
+                    // Set download button
+                    downloadBtn.href = media.url;
+                    downloadBtn.download = 'instagram-photo.jpg';
+                } else if (media.type === 'video') {
+                    // Display video
+                    mediaContainer.innerHTML = `
+                        <video src="${media.url}" controls class="img-fluid rounded mb-3 max-height-600"></video>
+                    `;
+                    
+                    // Set download button
+                    downloadBtn.href = media.url;
+                    downloadBtn.download = 'instagram-video.mp4';
+                } else if (media.type === 'carousel') {
+                    // Display carousel
+                    let carouselHTML = `
+                        <div id="instagram-carousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                    `;
+                    
+                    // Add indicators
+                    media.items.forEach((item, index) => {
+                        carouselHTML += `
+                            <button type="button" data-bs-target="#instagram-carousel" data-bs-slide-to="${index}" ${index === 0 ? 'class="active"' : ''}></button>
+                        `;
+                    });
+                    
+                    carouselHTML += `
+                            </div>
+                            <div class="carousel-inner">
+                    `;
+                    
+                    // Add carousel items
+                    media.items.forEach((item, index) => {
+                        carouselHTML += `
+                            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                <img src="${item.url}" class="d-block w-100 rounded max-height-600" alt="Instagram Carousel Item ${index + 1}">
+                            </div>
+                        `;
+                    });
+                    
+                    carouselHTML += `
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#instagram-carousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#instagram-carousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    `;
+                    
+                    mediaContainer.innerHTML = carouselHTML;
+                    
+                    // Initialize carousel
+                    new bootstrap.Carousel(document.getElementById('instagram-carousel'));
+                    
+                    // Set download button for first item
+                    downloadBtn.href = media.items[0].url;
+                    downloadBtn.download = 'instagram-carousel-item.jpg';
+                    
+                    // Add download all button for carousel
+                    const downloadAllBtn = document.createElement('a');
+                    downloadAllBtn.className = 'btn btn-secondary btn-lg ms-2';
+                    downloadAllBtn.innerHTML = '<i class="fas fa-download me-2"></i> Download All';
+                    downloadAllBtn.href = '#';
+                    downloadAllBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('In a real application, this would download all carousel items as a zip file.');
+                    });
+                    
+                    downloadBtn.parentNode.appendChild(downloadAllBtn);
+                }
+                
+                // Show media section
+                mediaSection.classList.remove('d-none');
+            }
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            instagramUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getMediaBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        .max-height-600 {
+            max-height: 600px;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
+</body>
+</html> 

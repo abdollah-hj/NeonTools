@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Video Downloader - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download videos from Facebook posts and pages with our free online Facebook Video Downloader tool.">
+    <meta name="keywords" content="facebook video downloader, download facebook videos, facebook media downloader, save facebook videos">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">Facebook Video Downloader</h1>
+            <p class="lead">Download videos from Facebook posts and pages</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter Facebook Video URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="text" id="facebook-url" class="form-control" placeholder="https://www.facebook.com/username/videos/1234567890">
+                                <button id="get-video-btn" class="btn btn-primary">Get Video</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Paste the URL of a Facebook post containing a video
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Fetching video...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Post Information</h2>
+                            <div id="post-info" class="d-none">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="user-avatar" src="" alt="User Avatar" class="img-fluid rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div>
+                                        <h5 id="user-name" class="mb-1"></h5>
+                                        <p id="post-date" class="mb-0 small text-muted"></p>
+                                    </div>
+                                </div>
+                                <p id="post-text" class="mt-3 mb-0"></p>
+                            </div>
+                            <div id="no-post-info" class="text-center py-4">
+                                <i class="fab fa-facebook fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter a Facebook video URL to see information and download video</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video-section" class="video-section mb-5 d-none">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Available Video</h2>
+                    <div class="row">
+                        <div class="col-lg-8 mb-4 mb-lg-0">
+                            <div id="video-container" class="text-center">
+                                <!-- Video will be added here dynamically -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card neon-card h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-3">Download Options</h3>
+                                    <div id="quality-options">
+                                        <!-- Quality options will be added here dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="disclaimer-section mb-5">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i> Important Disclaimer</h4>
+                <p>This tool is for personal use only. Please respect copyright and privacy rights when downloading and using Facebook content.</p>
+                <hr>
+                <p class="mb-0">Facebook's terms of service may restrict automated downloading of content. Use this tool responsibly and ethically.</p>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the Facebook Video Downloader</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Find a Facebook post containing a video that you want to download.</li>
+                        <li class="mb-2">Click on the video to open it in a separate page or right-click and select "Copy video URL".</li>
+                        <li class="mb-2">Paste the URL in the input field above.</li>
+                        <li class="mb-2">Click the "Get Video" button.</li>
+                        <li class="mb-2">Once the video loads, select your preferred quality and click "Download" to save it to your device.</li>
+                    </ol>
+                    <h3 class="mt-4">About Facebook Videos</h3>
+                    <p class="text-white">Facebook hosts various types of video content:</p>
+                    <ul class="text-white">
+                        <li><strong>Regular Videos:</strong> Videos uploaded directly to Facebook by users or pages.</li>
+                        <li><strong>Live Videos:</strong> Streams that can be recorded and replayed after the broadcast ends.</li>
+                        <li><strong>Stories:</strong> Temporary videos that disappear after 24 hours (not supported by this tool).</li>
+                        <li><strong>Reels:</strong> Short-form videos similar to TikTok.</li>
+                        <li><strong>Watch Videos:</strong> Longer-form content from creators and publishers.</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool works with public Facebook videos only. Private videos cannot be accessed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">YouTube Thumbnail Downloader</h5>
+                            <p class="card-text flex-grow-1">Download thumbnails from YouTube videos in high resolution.</p>
+                            <a href="youtube-thumbnail-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Instagram Photo Downloader</h5>
+                            <p class="card-text flex-grow-1">Download photos and videos from Instagram posts.</p>
+                            <a href="instagram-photo-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Twitter Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Twitter posts and tweets.</p>
+                            <a href="twitter-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">TikTok Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from TikTok without watermark.</p>
+                            <a href="tiktok-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const facebookUrlInput = document.getElementById('facebook-url');
+            const getVideoBtn = document.getElementById('get-video-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const postInfo = document.getElementById('post-info');
+            const noPostInfo = document.getElementById('no-post-info');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            const postDate = document.getElementById('post-date');
+            const postText = document.getElementById('post-text');
+            const videoSection = document.getElementById('video-section');
+            const videoContainer = document.getElementById('video-container');
+            const qualityOptions = document.getElementById('quality-options');
+            
+            // Sample video qualities for demonstration
+            const sampleQualities = [
+                { name: 'SD Quality (360p)', url: 'https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_1mb.mp4', resolution: '640x360' },
+                { name: 'HD Quality (720p)', url: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', resolution: '1280x720' },
+                { name: 'Full HD Quality (1080p)', url: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', resolution: '1920x1080' }
+            ];
+            
+            // Get video button click handler
+            getVideoBtn.addEventListener('click', function() {
+                const facebookUrl = facebookUrlInput.value.trim();
+                
+                if (!facebookUrl) {
+                    showError('Please enter a Facebook video URL');
+                    return;
+                }
+                
+                // Validate Facebook URL
+                if (!isValidFacebookUrl(facebookUrl)) {
+                    showError('Invalid Facebook URL. Please enter a valid Facebook video URL');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Simulate API call (in a real app, you would fetch data from Facebook API or scrape the page)
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Display post info
+                    displayPostInfo();
+                    
+                    // Display video
+                    displayVideo(sampleQualities);
+                }, 1500);
+            });
+            
+            // Validate Facebook URL
+            function isValidFacebookUrl(url) {
+                // Regular expression to match Facebook video URLs
+                const regExp = /^https?:\/\/(www\.|m\.)?facebook\.com\/(watch\?v=|.+\/videos\/|.+\/posts\/|.+\/reels\/|.+\/reel\/|video\.php\?v=|story\.php\?story_fbid=)[0-9]+/;
+                return regExp.test(url);
+            }
+            
+            // Display post information
+            function displayPostInfo() {
+                // Set user avatar (placeholder)
+                userAvatar.src = 'https://source.unsplash.com/random/60x60?profile';
+                
+                // Set user name (placeholder)
+                userName.textContent = 'Facebook User';
+                
+                // Set post date (placeholder)
+                const now = new Date();
+                postDate.textContent = now.toLocaleDateString();
+                
+                // Set post text (placeholder)
+                postText.textContent = 'This is a sample Facebook post with a video. Check out this amazing content! #facebook #video #neontools';
+                
+                // Show post info, hide no post info
+                postInfo.classList.remove('d-none');
+                noPostInfo.classList.add('d-none');
+            }
+            
+            // Display video
+            function displayVideo(qualities) {
+                // Clear previous video
+                videoContainer.innerHTML = '';
+                
+                // Use the highest quality for preview
+                const highestQuality = qualities[qualities.length - 1];
+                
+                // Display video
+                videoContainer.innerHTML = `
+                    <video src="${highestQuality.url}" controls class="img-fluid rounded mb-3 max-height-500"></video>
+                `;
+                
+                // Clear previous quality options
+                qualityOptions.innerHTML = '';
+                
+                // Add quality options
+                qualities.forEach((quality, index) => {
+                    const qualityOption = document.createElement('div');
+                    qualityOption.className = 'mb-3';
+                    qualityOption.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>${quality.name}</span>
+                            <span class="badge bg-secondary">${quality.resolution}</span>
+                        </div>
+                        <a href="${quality.url}" class="btn btn-primary w-100" download="facebook-video-${index}.mp4" target="_blank">
+                            <i class="fas fa-download me-2"></i> Download
+                        </a>
+                    `;
+                    
+                    qualityOptions.appendChild(qualityOption);
+                });
+                
+                // Show video section
+                videoSection.classList.remove('d-none');
+            }
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            facebookUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getVideoBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        .max-height-500 {
+            max-height: 500px;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
+</body>
+</html> 

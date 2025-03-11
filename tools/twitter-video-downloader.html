@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Video Downloader - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download videos from Twitter posts and tweets with our free online Twitter Video Downloader tool.">
+    <meta name="keywords" content="twitter video downloader, download twitter videos, twitter media downloader, save twitter videos">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">Twitter Video Downloader</h1>
+            <p class="lead">Download videos from Twitter posts and tweets</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter Twitter Post URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="text" id="twitter-url" class="form-control" placeholder="https://twitter.com/username/status/1234567890">
+                                <button id="get-video-btn" class="btn btn-primary">Get Video</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Paste the URL of a Twitter post containing a video
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Fetching video...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Tweet Information</h2>
+                            <div id="tweet-info" class="d-none">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="user-avatar" src="" alt="User Avatar" class="img-fluid rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div>
+                                        <h5 id="user-name" class="mb-1"></h5>
+                                        <p id="user-handle" class="mb-1 text-muted"></p>
+                                        <p id="tweet-date" class="mb-0 small text-muted"></p>
+                                    </div>
+                                </div>
+                                <p id="tweet-text" class="mt-3 mb-0"></p>
+                            </div>
+                            <div id="no-tweet-info" class="text-center py-4">
+                                <i class="fab fa-twitter fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter a Twitter post URL to see information and download video</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section id="video-section" class="video-section mb-5 d-none">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Available Video</h2>
+                    <div class="row">
+                        <div class="col-lg-8 mb-4 mb-lg-0">
+                            <div id="video-container" class="text-center">
+                                <!-- Video will be added here dynamically -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card neon-card h-100">
+                                <div class="card-body">
+                                    <h3 class="card-title mb-3">Download Options</h3>
+                                    <div id="quality-options">
+                                        <!-- Quality options will be added here dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="disclaimer-section mb-5">
+            <div class="alert alert-warning">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i> Important Disclaimer</h4>
+                <p>This tool is for personal use only. Please respect copyright and privacy rights when downloading and using Twitter content.</p>
+                <hr>
+                <p class="mb-0">Twitter's terms of service may restrict automated downloading of content. Use this tool responsibly and ethically.</p>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the Twitter Video Downloader</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Find a tweet containing a video that you want to download.</li>
+                        <li class="mb-2">Click on the tweet to open it in a separate page.</li>
+                        <li class="mb-2">Copy the URL from your browser's address bar.</li>
+                        <li class="mb-2">Paste the URL in the input field above.</li>
+                        <li class="mb-2">Click the "Get Video" button.</li>
+                        <li class="mb-2">Once the video loads, select your preferred quality and click "Download" to save it to your device.</li>
+                    </ol>
+                    <h3 class="mt-4">About Twitter Videos</h3>
+                    <p class="text-white">Twitter supports various video formats and qualities:</p>
+                    <ul class="text-white">
+                        <li><strong>Standard Videos:</strong> Regular videos uploaded directly to Twitter.</li>
+                        <li><strong>GIFs:</strong> Animated GIFs that play automatically in the timeline.</li>
+                        <li><strong>Live Videos:</strong> Streams that can be recorded and replayed after the broadcast ends.</li>
+                        <li><strong>Video Quality:</strong> Twitter typically provides videos in multiple qualities (low, medium, high).</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool works with public Twitter posts only. Protected tweets cannot be accessed.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">YouTube Thumbnail Downloader</h5>
+                            <p class="card-text flex-grow-1">Download thumbnails from YouTube videos in high resolution.</p>
+                            <a href="youtube-thumbnail-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Instagram Photo Downloader</h5>
+                            <p class="card-text flex-grow-1">Download photos and videos from Instagram posts.</p>
+                            <a href="instagram-photo-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Facebook Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Facebook posts and pages.</p>
+                            <a href="facebook-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">TikTok Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from TikTok without watermark.</p>
+                            <a href="tiktok-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const twitterUrlInput = document.getElementById('twitter-url');
+            const getVideoBtn = document.getElementById('get-video-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const tweetInfo = document.getElementById('tweet-info');
+            const noTweetInfo = document.getElementById('no-tweet-info');
+            const userAvatar = document.getElementById('user-avatar');
+            const userName = document.getElementById('user-name');
+            const userHandle = document.getElementById('user-handle');
+            const tweetDate = document.getElementById('tweet-date');
+            const tweetText = document.getElementById('tweet-text');
+            const videoSection = document.getElementById('video-section');
+            const videoContainer = document.getElementById('video-container');
+            const qualityOptions = document.getElementById('quality-options');
+            
+            // Sample video qualities for demonstration
+            const sampleQualities = [
+                { name: 'Low Quality (360p)', url: 'https://sample-videos.com/video123/mp4/360/big_buck_bunny_360p_1mb.mp4', resolution: '640x360' },
+                { name: 'Medium Quality (480p)', url: 'https://sample-videos.com/video123/mp4/480/big_buck_bunny_480p_1mb.mp4', resolution: '854x480' },
+                { name: 'High Quality (720p)', url: 'https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4', resolution: '1280x720' }
+            ];
+            
+            // Get video button click handler
+            getVideoBtn.addEventListener('click', function() {
+                const twitterUrl = twitterUrlInput.value.trim();
+                
+                if (!twitterUrl) {
+                    showError('Please enter a Twitter post URL');
+                    return;
+                }
+                
+                // Validate Twitter URL
+                if (!isValidTwitterUrl(twitterUrl)) {
+                    showError('Invalid Twitter URL. Please enter a valid Twitter post URL');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Simulate API call (in a real app, you would fetch data from Twitter API or scrape the page)
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Display tweet info
+                    displayTweetInfo(twitterUrl);
+                    
+                    // Display video
+                    displayVideo(sampleQualities);
+                }, 1500);
+            });
+            
+            // Validate Twitter URL
+            function isValidTwitterUrl(url) {
+                // Regular expression to match Twitter post URLs
+                const regExp = /^https?:\/\/(www\.)?(twitter|x)\.com\/[a-zA-Z0-9_]+\/status\/[0-9]+/;
+                return regExp.test(url);
+            }
+            
+            // Extract tweet ID from Twitter URL
+            function extractTweetId(url) {
+                const match = url.match(/\/status\/([0-9]+)/);
+                return match ? match[1] : null;
+            }
+            
+            // Display tweet information
+            function displayTweetInfo(url) {
+                // Set user avatar (placeholder)
+                userAvatar.src = 'https://source.unsplash.com/random/60x60?person';
+                
+                // Set user name (placeholder)
+                userName.textContent = 'Twitter User';
+                
+                // Set user handle (placeholder)
+                userHandle.textContent = '@twitter_user';
+                
+                // Set tweet date (placeholder)
+                const now = new Date();
+                tweetDate.textContent = now.toLocaleDateString();
+                
+                // Set tweet text (placeholder)
+                tweetText.textContent = 'This is a sample tweet with a video. Check out this amazing content! #twitter #video #neontools';
+                
+                // Show tweet info, hide no tweet info
+                tweetInfo.classList.remove('d-none');
+                noTweetInfo.classList.add('d-none');
+            }
+            
+            // Display video
+            function displayVideo(qualities) {
+                // Clear previous video
+                videoContainer.innerHTML = '';
+                
+                // Use the highest quality for preview
+                const highestQuality = qualities[qualities.length - 1];
+                
+                // Display video
+                videoContainer.innerHTML = `
+                    <video src="${highestQuality.url}" controls class="img-fluid rounded mb-3 max-height-500"></video>
+                `;
+                
+                // Clear previous quality options
+                qualityOptions.innerHTML = '';
+                
+                // Add quality options
+                qualities.forEach((quality, index) => {
+                    const qualityOption = document.createElement('div');
+                    qualityOption.className = 'mb-3';
+                    qualityOption.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>${quality.name}</span>
+                            <span class="badge bg-secondary">${quality.resolution}</span>
+                        </div>
+                        <a href="${quality.url}" class="btn btn-primary w-100" download="twitter-video-${index}.mp4" target="_blank">
+                            <i class="fas fa-download me-2"></i> Download
+                        </a>
+                    `;
+                    
+                    qualityOptions.appendChild(qualityOption);
+                });
+                
+                // Show video section
+                videoSection.classList.remove('d-none');
+            }
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            twitterUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getVideoBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        .max-height-500 {
+            max-height: 500px;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+    </style>
+</body>
+</html> 

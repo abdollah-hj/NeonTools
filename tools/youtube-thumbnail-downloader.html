@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Downloader - NeonTools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Download thumbnails from YouTube videos in high resolution with our free online YouTube Thumbnail Downloader tool.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail extractor, high resolution youtube thumbnail">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-placeholder"></div>
+
+    <main class="container mt-4">
+        <!-- Tool Header -->
+        <section class="tool-header text-center mb-5">
+            <h1 class="display-4 neon-text">YouTube Thumbnail Downloader</h1>
+            <p class="lead">Download thumbnails from YouTube videos in high resolution</p>
+        </section>
+
+        <!-- Ad Section -->
+        <section class="ad-section mb-5">
+            <div class="ad-container text-center p-4 neon-border">
+                <p>Advertisement Space</p>
+                <!-- Ad code will go here -->
+            </div>
+        </section>
+
+        <!-- Tool Content -->
+        <section class="tool-content mb-5">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Enter YouTube Video URL</h2>
+                            <div class="input-group mb-4">
+                                <input type="text" id="video-url" class="form-control" placeholder="https://www.youtube.com/watch?v=XXXXXXXXXXX">
+                                <button id="get-thumbnail-btn" class="btn btn-primary">Get Thumbnails</button>
+                            </div>
+                            <div class="form-text text-white mb-3">
+                                <i class="fas fa-info-circle me-1"></i> Paste a YouTube video URL or just the video ID
+                            </div>
+                            <div id="error-message" class="alert alert-danger d-none"></div>
+                            <div id="loading-indicator" class="text-center d-none">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2 text-white">Fetching thumbnails...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card neon-card">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Video Information</h2>
+                            <div id="video-info" class="d-none">
+                                <div class="d-flex align-items-center mb-3">
+                                    <img id="video-thumbnail-preview" src="" alt="Video Thumbnail" class="img-fluid rounded me-3" style="width: 120px;">
+                                    <div>
+                                        <h5 id="video-title" class="mb-1"></h5>
+                                        <p id="video-channel" class="mb-1 text-muted"></p>
+                                        <p id="video-id" class="mb-0 small text-muted"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="no-video-info" class="text-center py-4">
+                                <i class="fas fa-photo-video fa-4x mb-3 text-muted"></i>
+                                <p class="text-white">Enter a YouTube video URL to see information and download thumbnails</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thumbnails Section -->
+        <section id="thumbnails-section" class="thumbnails-section mb-5 d-none">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Available Thumbnails</h2>
+                    <div class="row" id="thumbnails-container">
+                        <!-- Thumbnails will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="how-to-use mb-5">
+            <div class="card neon-card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">How to Use the YouTube Thumbnail Downloader</h2>
+                    <ol class="text-white">
+                        <li class="mb-2">Copy the URL of the YouTube video you want to download the thumbnail from.</li>
+                        <li class="mb-2">Paste the URL in the input field above.</li>
+                        <li class="mb-2">Click the "Get Thumbnails" button.</li>
+                        <li class="mb-2">Choose the resolution you prefer and click "Download" to save the thumbnail to your device.</li>
+                    </ol>
+                    <h3 class="mt-4">About YouTube Thumbnails</h3>
+                    <p class="text-white">YouTube thumbnails are the preview images that represent videos on the platform. They play a crucial role in attracting viewers to click on and watch videos. YouTube provides several thumbnail resolutions:</p>
+                    <ul class="text-white">
+                        <li><strong>Default (120x90):</strong> The smallest thumbnail size.</li>
+                        <li><strong>Medium Quality (320x180):</strong> Medium-sized thumbnail.</li>
+                        <li><strong>High Quality (480x360):</strong> Higher quality thumbnail.</li>
+                        <li><strong>Standard Definition (640x480):</strong> Standard definition thumbnail.</li>
+                        <li><strong>Maximum Resolution (1280x720):</strong> The highest quality thumbnail available, usually in HD.</li>
+                        <li><strong>Maximum Resolution (1920x1080):</strong> Full HD thumbnail, if available.</li>
+                    </ul>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> This tool works with public YouTube videos only. Private or unlisted videos may not work properly.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="related-tools mb-5">
+            <h2 class="section-title neon-text mb-4">Related Tools</h2>
+            <div class="row g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Instagram Photo Downloader</h5>
+                            <p class="card-text flex-grow-1">Download photos and videos from Instagram posts.</p>
+                            <a href="instagram-photo-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Twitter Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from Twitter posts and tweets.</p>
+                            <a href="twitter-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">YouTube Tags Extractor</h5>
+                            <p class="card-text flex-grow-1">Extract tags from YouTube videos for SEO analysis.</p>
+                            <a href="youtube-tags-extractor.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card tool-card neon-card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">TikTok Video Downloader</h5>
+                            <p class="card-text flex-grow-1">Download videos from TikTok without watermark.</p>
+                            <a href="tiktok-video-downloader.html" class="btn btn-primary mt-auto">Use Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Add error handling for component loading
+        window.addEventListener('error', function(e) {
+            // Check if the error is related to loading a component
+            if (e.target && (e.target.src || e.target.href)) {
+                console.error('Resource loading error:', e.target.src || e.target.href);
+                
+                // If header failed to load, create a basic header
+                if (!document.querySelector('header') && document.getElementById('header-placeholder')) {
+                    document.getElementById('header-placeholder').innerHTML = `
+                        <header class="sticky-top">
+                            <nav class="navbar navbar-dark bg-dark">
+                                <div class="container">
+                                    <a class="navbar-brand" href="../index.html">NeonTools</a>
+                                    <a href="../index.html" class="btn btn-outline-light">Back to Home</a>
+                                </div>
+                            </nav>
+                        </header>
+                    `;
+                }
+            }
+        }, true);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const videoUrlInput = document.getElementById('video-url');
+            const getThumbnailBtn = document.getElementById('get-thumbnail-btn');
+            const errorMessage = document.getElementById('error-message');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const videoInfo = document.getElementById('video-info');
+            const noVideoInfo = document.getElementById('no-video-info');
+            const videoThumbnailPreview = document.getElementById('video-thumbnail-preview');
+            const videoTitle = document.getElementById('video-title');
+            const videoChannel = document.getElementById('video-channel');
+            const videoId = document.getElementById('video-id');
+            const thumbnailsSection = document.getElementById('thumbnails-section');
+            const thumbnailsContainer = document.getElementById('thumbnails-container');
+            
+            // YouTube thumbnail quality options
+            const thumbnailQualities = [
+                { name: 'Default', suffix: 'default', resolution: '120x90' },
+                { name: 'Medium Quality', suffix: 'mqdefault', resolution: '320x180' },
+                { name: 'High Quality', suffix: 'hqdefault', resolution: '480x360' },
+                { name: 'Standard Definition', suffix: 'sddefault', resolution: '640x480' },
+                { name: 'Maximum Resolution', suffix: 'maxresdefault', resolution: '1280x720' }
+            ];
+            
+            // Get thumbnail button click handler
+            getThumbnailBtn.addEventListener('click', function() {
+                const videoUrl = videoUrlInput.value.trim();
+                
+                if (!videoUrl) {
+                    showError('Please enter a YouTube video URL');
+                    return;
+                }
+                
+                // Extract video ID from URL
+                const videoId = extractVideoId(videoUrl);
+                
+                if (!videoId) {
+                    showError('Invalid YouTube URL. Please enter a valid YouTube video URL');
+                    return;
+                }
+                
+                // Show loading indicator
+                loadingIndicator.classList.remove('d-none');
+                errorMessage.classList.add('d-none');
+                
+                // Simulate API call (in a real app, you would fetch video data from YouTube API)
+                setTimeout(() => {
+                    // Hide loading indicator
+                    loadingIndicator.classList.add('d-none');
+                    
+                    // Display video info (simulated)
+                    displayVideoInfo(videoId);
+                    
+                    // Display thumbnails
+                    displayThumbnails(videoId);
+                }, 1000);
+            });
+            
+            // Extract video ID from YouTube URL
+            function extractVideoId(url) {
+                // Regular expressions to match different YouTube URL formats
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+                const match = url.match(regExp);
+                
+                return (match && match[2].length === 11) ? match[2] : null;
+            }
+            
+            // Display video information
+            function displayVideoInfo(videoId) {
+                // In a real app, you would fetch this data from YouTube API
+                // For this demo, we'll use the video ID and generate placeholder info
+                
+                // Set video thumbnail preview
+                videoThumbnailPreview.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                
+                // Set video title (placeholder)
+                videoTitle.textContent = 'YouTube Video';
+                
+                // Set video channel (placeholder)
+                videoChannel.textContent = 'YouTube Channel';
+                
+                // Set video ID
+                videoId.textContent = `Video ID: ${videoId}`;
+                
+                // Show video info, hide no video info
+                videoInfo.classList.remove('d-none');
+                noVideoInfo.classList.add('d-none');
+            }
+            
+            // Display thumbnails
+            function displayThumbnails(videoId) {
+                // Clear previous thumbnails
+                thumbnailsContainer.innerHTML = '';
+                
+                // Create thumbnail cards for each quality
+                thumbnailQualities.forEach(quality => {
+                    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/${quality.suffix}.jpg`;
+                    
+                    // Create thumbnail card
+                    const thumbnailCard = document.createElement('div');
+                    thumbnailCard.className = 'col-md-6 col-lg-4 mb-4';
+                    thumbnailCard.innerHTML = `
+                        <div class="card neon-card h-100">
+                            <img src="${thumbnailUrl}" class="card-img-top thumbnail-img" alt="${quality.name} Thumbnail" onerror="this.onerror=null; this.src='https://img.youtube.com/vi/${videoId}/0.jpg';">
+                            <div class="card-body">
+                                <h5 class="card-title">${quality.name}</h5>
+                                <p class="card-text">Resolution: ${quality.resolution}</p>
+                                <a href="${thumbnailUrl}" class="btn btn-primary w-100" download="youtube-thumbnail-${videoId}-${quality.suffix}.jpg" target="_blank">Download</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Add thumbnail card to container
+                    thumbnailsContainer.appendChild(thumbnailCard);
+                });
+                
+                // Show thumbnails section
+                thumbnailsSection.classList.remove('d-none');
+            }
+            
+            // Show error message
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('d-none');
+                loadingIndicator.classList.add('d-none');
+            }
+            
+            // Handle Enter key press in input field
+            videoUrlInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    getThumbnailBtn.click();
+                }
+            });
+        });
+    </script>
+    <style>
+        /* Custom styles for this tool */
+        .tool-header h1 {
+            font-weight: 700;
+            text-shadow: 
+                0 0 5px var(--neon-primary),
+                0 0 10px var(--neon-primary),
+                0 0 20px var(--neon-primary);
+        }
+        
+        /* Ensure logo is visible in tool pages */
+        .logo-glow {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: drop-shadow(0 0 10px #0ff) 
+                    drop-shadow(0 0 20px #0ff);
+            animation: logo-pulse 2s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-glow:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes logo-pulse {
+            from {
+                filter: drop-shadow(0 0 10px #0ff) 
+                        drop-shadow(0 0 20px #0ff);
+            }
+            to {
+                filter: drop-shadow(0 0 20px #0ff) 
+                        drop-shadow(0 0 30px #0ff);
+            }
+        }
+        
+        .thumbnail-img {
+            height: 180px;
+            object-fit: cover;
+        }
+    </style>
+</body>
+</html> 
